@@ -1,13 +1,18 @@
 package org.yousharp.pointatoffer.array;
 
-import java.util.Arrays;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 描述：打印从1到最大的n位数，比如n为4，输出1，2，3一直到
- * 最大的4位数，即9999；
+ * 问题描述：
+ *  输入整数n，打印从1到最大的n位数，比如n为4，输出1，2，3一直到最大的4位数，即9999；
+ *
+ * 思路：
+ *  n值可能较大，所以此题为大数问题。大数问题一般可通过字符串或者数组来模拟解决。
+ *  思路一：通过使用字符数组来模拟整数的加1操作。即每次在当前子浮串表示的整数上加1，从最低位到最高位，记录进位。复杂度
+ *  为O(10^n)；
+ *  思路二：使用整数数组通过递归实现，即打印i位表示的整数，假设i-1表示的整数可列举，则只需将第i位从0到9遍历，同时与i-1位
+ *  表示的整数序列组合即可。复杂度为O(10^n)；注意，递归可能会导致栈溢出。
  *
  * User: lingguo
  * Date: 14-3-3
@@ -18,32 +23,33 @@ public class PrintOneToMaxNum {
 	private static Logger logger = LoggerFactory.getLogger(PrintOneToMaxNum.class);
 
 	/**
-	 *   方法一：过字符串模拟整数的加1操作：在最后一位上加一，同时记录进位，从低位向高位遍历，遇到没有进位或者
-	 *   在最高位有进位，退出。
-	 * @param data  保存整数的字符串，初始化各位都为‘0’
-	 * @param length   字符串组的长度
-	 * @return
+	 * 【方法一】：用字符串（字符数组）模拟整数的加1操作：在字符数组表示的整数上加一，同时记录进位，进位从低位向高位传递，
+     *      该操作在两种情况下退出：1. 在某一位上没有发生进位；2. 在最高位（字符数组第一位）发生了进位；
+	 * @param data  字符数组，表示当前整数
+	 * @param length   字符串数组的长度
+	 * @return  是否发生了溢出
 	 */
 	public static boolean addByOne(char[] data, int length) {
-		boolean isOverflow = false;
-		int carry = 0;
+		boolean isOverflow = false;     // 溢出标志
+		int carry = 0;                  // 进位标志
+        // 从低位向高位遍历
 		for (int i = length - 1; i >= 0; i--) {
 			int sum = data[i] - '0' + carry;
-			// the last bit, add one
+			// 如果是最后一位，则加1
 			if (i == length - 1) {
 				sum++;
 			}
-			// carry out occurs
+			// 是否发生进位
 			if (sum >= 10) {
-				if (i == 0) {
-					isOverflow = true;  // overflow
+				if (i == 0) {   // 如果最高位发生了进位，表示溢出
+					isOverflow = true;
 					break;
 				}
-				// not overflow, alter data and carry
+				// 发生了进位，需要向更高一位加1
 				data[i] = '0';
 				carry = 1;
 			} else {
-				// no carry out, alter data
+				// 没有发生进位，加1操作结束
 				data[i] = (char)(sum + '0');
 				break;
 			}
@@ -51,30 +57,54 @@ public class PrintOneToMaxNum {
 		return isOverflow;
 	}
 
+    /**
+     * 【方法一】：将字符数组表示的整数打印出来，去掉前缀0
+     * @param data  字符数组表示的整数值
+     * @param length    字符数组的长度
+     */
+    public static void printNumber(char[] data, int length) {
+        boolean zeroPrefix = true;
+        for (int i = 0; i < length; i++) {
+            if (zeroPrefix) {
+                if (data[i] != '0') {
+                    zeroPrefix = false;
+                    System.out.print(data[i]);
+                }
+            } else {
+                System.out.print(data[i]);
+            }
+        }
+        System.out.println();
+    }
+
 	/**
-	 *  方法一：环模拟加1操作，知道发生溢出，则遍历了所有的整数
-	 * @param data  保存字符串数字的数组，初始化各位均为'0'
+	 * 【方法一】：循环模拟加1操作，直到发生溢出，则遍历了所有的整数
+	 * @param data  字符数组，各位初始化为'0'
 	 * @param length  数组的长度
 	 */
 	public static void stringMethod(char[] data, int length) {
-		while (addByOne(data, length) == false) {
-			System.out.println(Arrays.toString(data));
+        for (int i = 0; i < length; i++) {
+            data[i] = '0';
+        }
+		while (!addByOne(data, length)) {
+			printNumber(data, length);
 		}
 	}
 
 	/**
-	 *  方法二：使用数组模拟，用递归的策略，假设除第一位之外的n-1位数已经准备好，则只需要将第一位
-	 * 从0到9遍历一遍即可。
-	 *
-	 * @param data
-	 * @param length
-	 * @param index
+	 * 【方法二】：使用整数数组递归实现，数组索引较小表示整数的高位，比如要求第i位开始的所有整数，假设i-1位开始的所有
+     *      整数都已经排列好，则只需将第i位从0到9遍历一遍即可。
+	 * @param data  整数数组
+	 * @param length    数组的长度
+	 * @param index     当前索引
 	 */
 	public static void recursionMethod(int[] data, int length, int index) {
+        // 如果遍历过了最后一位，则遍历结束，打印当前数组表示的整数
 		if (index == length) {
 			printNumber(data, length);
 			return;
 		}
+        // 每一位都从0到9递归遍历
 		for (int i = 0; i <= 9; i++) {
 			data[index] = i;
 			recursionMethod(data, length, index + 1);
@@ -82,9 +112,9 @@ public class PrintOneToMaxNum {
 	}
 
 	/**
-	 *  方法二：果遍历到最后一位，打印该数字，注意去掉数字前缀0；
-	 * @param data
-	 * @param length
+	 * 【方法二】：打印数组表示的整数值，去掉前缀0
+	 * @param data  数组表示的整数值
+	 * @param length    数组的长度
 	 */
 	public static void printNumber(int[] data, int length) {
 		boolean zeroPrefix = true;
@@ -104,9 +134,9 @@ public class PrintOneToMaxNum {
 	public static void main(String[] args) {
 		int length = 2;
 		int[] data = new int[length];
-//		PrintOneToMaxNum.recursionMethod(data, length, 0);
+		PrintOneToMaxNum.recursionMethod(data, length, 0);
 
-		char[] str = new char[] {'0', '0'};
-		PrintOneToMaxNum.stringMethod(str, 2);
+		char[] str = new char[2];
+//		PrintOneToMaxNum.stringMethod(str, str.length);
 	}
 }
