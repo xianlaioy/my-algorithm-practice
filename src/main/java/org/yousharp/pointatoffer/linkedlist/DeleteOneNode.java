@@ -5,7 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.yousharp.common.ListNode;
 
 /**
- * 问题：给定一个链表的头和其中的某一个节点，在O(1)的时间内删除该指定的节点。
+ * 问题：
+ *  给定一个链表和其中一个节点，删除该节点；
+ *
+ * 思路：
+ *  节点的差异体现在节点对象的内容不同。要删除当前节点，可以将当前节点与下一节点的值互换，然后删除下一个节点即可。
+ *  需要注意的是，如果要删除的节点是最后一个节点，没有下一个节点，此时需要从头遍历了。如果要删除的节点不是最后一
+ *  个节点，复杂度为O(1)，否则复杂度为O(n)，平均复杂度为O(1)。
+ *
  * User: lingguo
  * Date: 14-3-10
  * Time: 下午11:49
@@ -13,46 +20,36 @@ import org.yousharp.common.ListNode;
 public class DeleteOneNode {
 	private static Logger logger = LoggerFactory.getLogger(DeleteOneNode.class);
 
+    /**
+     * 从链表中删除某一个节点
+     * @param head  链表的头节点
+     * @param toDelete  要删除的节点
+     * @return 头节点
+     */
 	public static ListNode delete(ListNode head, ListNode toDelete) {
 		// param error
 		if (head == null || toDelete == null) {
-			return null;
+			return head;
 		}
-		// if the node to delete is the last node of the list
+		// 最后一个节点
 		if (toDelete.next == null) {
-			// only one node in the list
+			// 也是头节点
 			if (head == toDelete) {
-				head = null;
-				return head;
+                return null;
 			}
-			// more than one node in the list
+			// 遍历查找前一个节点
 			ListNode node = head;
 			while (node.next != toDelete) {
 				node = node.next;
 			}
-			node.next = null;
+			node.next = node.next.next;
 			return head;
 		}
-		// if the node to delete is not the last node,
-		// get the value of the next node and delete the next node
-		int tmp = toDelete.value;
+
+        // 不是最后一个节点，将下一个节点的值覆盖当前节点的值，删除下一个节点
 		toDelete.value = toDelete.next.value;
-		toDelete.next.value = tmp;
-		toDelete.next = null;
+		toDelete.next = toDelete.next.next;
 		return head;
 	}
 
-	public static void main(String[] args) {
-		ListNode root = new ListNode(10);
-		ListNode second = new ListNode(5);
-		root.next = second;
-		ListNode toDelete = second;
-		logger.info("head: {}", DeleteOneNode.delete(root, toDelete).value);
-	}
 }
-
-
-/**
- * 思路：对于指定的节点，保留其下一个节点的值，删除下一个节点即可。
- * 需要注意一些特殊情况：待删除的节点是链表的最后一个节点，或者链表仅有一个节点。
- */

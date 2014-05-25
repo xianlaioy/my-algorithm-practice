@@ -3,7 +3,14 @@ package org.yousharp.pointatoffer.linkedlist;
 import org.yousharp.common.ListNode;
 
 /**
- * 问题描述：给定两个单链表，都是递增有序的，将它们合并，合并后的链表仍然有序。
+ * 问题描述：
+ *  给定两个单链表，都是递增有序的，将它们合并，使合并后的链表仍然有序。
+ *
+ * 思路：
+ *  先比较两个单链表的第一个节点，值小的的节点作为合并后新链表的第一个节点；值小的节点的下一个
+ *  节点作为该单链表的新的头节点。相当于第一个节点已排好序，剩下的问题仍然是对两个有序链表进行
+ *  合并，则可以用递归的思路解决。
+ *
  * User: lingguo
  * Date: 14-3-17
  * Time: 下午9:16
@@ -11,13 +18,13 @@ import org.yousharp.common.ListNode;
 public class MergeTwoSortedList {
 
 	/**
-	 * merge two sorted linked list
-	 * @param firstHead     head of the first sorted linked list
-	 * @param secondHead    head of the second sorted linked list
-	 * @return  head of the merged sorted linked list
+	 * 合并两个有序单链表
+	 * @param firstHead     第一个单链表的头节点
+	 * @param secondHead    第二个单链表的头节点
+	 * @return  合并后的链表的头节点
 	 */
 	public static ListNode merge(ListNode firstHead, ListNode secondHead) {
-		// the exit of recursion
+		// 退出条件
 		if (firstHead == null) {
 			return secondHead;
 		}
@@ -25,18 +32,16 @@ public class MergeTwoSortedList {
 			return firstHead;
 		}
 
-		// compare the two current nodes and pick the small one as the new head node
+		// 比较两个单链表的第一个节点，值小的节点作为合并后的链表的节点
 		ListNode currentHead = null;
 		if (firstHead.value < secondHead.value) {
 			currentHead = firstHead;
-			// selected the new node, then recursing on the remain two parts
 			currentHead.next = merge(firstHead.next, secondHead);
 		} else {
 			currentHead = secondHead;
-			// selected the new node, then recursing on the remain two parts
 			currentHead.next = merge(firstHead, secondHead.next);
 		}
-		return currentHead;     // return the new head
+		return currentHead;
 	}
 
 	public static void main(String[] args) {

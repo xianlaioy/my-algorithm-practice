@@ -7,9 +7,32 @@ import org.yousharp.common.ListNode;
 import java.util.LinkedList;
 
 /**
- * there are N numbers in a circle, delete the Mth number every time
- *      from the circle and begin at the 0th number, the next begin number is the one
- *      that after the deleted number. What is the last number remained in the circle?
+ * 问题描述：
+ *  有n个数，从0到n-1，形成环状，即n-1后的数字为0；从0开始，每次从环中删除第m个数，然后
+ *  将删除元素的下一个元素作为第一个元素。如此循环，求最后剩下的数。
+ *
+ * 思路：
+ *  思路一：构造环形链表，每个节点有两个属性，一个是值，另一个是指向下一个元素的指针。每次从
+ *  环中删除第m个元素，直到链表中剩下一个元素。复杂度O(m*n)；
+ *  思路二：也是用链表模拟环，使用标准库的LinkedList，每次遍历到最后一个元素后，继续遍历链表
+ *  第一个元素；
+ *  思路三：寻找规律：f(n,m)表示从n个数(0,1,2,...,n-1)的环中删除第m个数后剩下的数；第一
+ *  次删掉了的元素为k（显然，k=m-1），剩下的元素为(k+1,k+2,...,n-1, 0, 1, ...,k-1)，此时
+ *  的序列有n-1个元素，但排列不同，从该序列每次删除第m个元素后最后剩下的元素记为f'(n-1,m)，则有
+ *  f(n,m)=f'(n-1,m)，但是我们将f'(n-1,m)与f(n-1,m)（序列为0,1,2,...,n-2)做一下映射，找规律：
+ *      f'(n-1,m)       f(n-1,m)
+ *      k+1             0
+ *      k+2             1
+ *      ...             ...
+ *      k-2             n-3
+ *      k-1             n-2
+ *  发现的映射规律为：[f(n-1,m) + (k+1)] % n = f'(n-1,m)
+ *  将该公式以及(k=m-1)与f(n,m)=f'(n-1,m)组合，有：
+ *  f(n,m) = [f(n-1)+m]%n
+ *  即如果要求f(n,m)，可以先求f(n-1)，得到的递归公式为：
+ *      f(n,m) = [f(n-1,m)+m]%n, (n=1, f(n,m)=0)
+ *  利用该公式，使用递归或者循环很容易解决。复杂度O(n)
+ *
  * User: Daniel
  * Date: 14-1-17
  * Time: 下午8:42
@@ -18,62 +41,62 @@ public class LastNumberInCircle {
 	private static Logger logger = LoggerFactory.getLogger(LastNumberInCircle.class);
 
 	/**
-	 * we construct a linked list, and delete the Mth element from the circle each time,
-	 *      remember to move the start node forward after each delete operation.
-	 * @param head  the head node of the link list
-	 * @param m delete the Mth number from the list
-	 * @return  the last remaining number of the list
+	 * 自定义链表节点，形成环状，每次从环中删除第m个节点，直到环中只剩下一个节点
+	 * @param head  头节点
+	 * @param m 要删除的第m个节点
+	 * @return  最后剩下的节点
 	 */
-	public ListNode linkListSolution(ListNode head, int m) {
-		if (null == head) {
+	public ListNode ListNodeMethod(ListNode head, int m) {
+		if (null == head || m <= 0) {
 			return null;
 		}
 
-		// link the last node to head to form a loop link list
+		// 寻找链表最后一个节点
 		ListNode loopNode = head;
 		while (null != loopNode.next) {
 			loopNode = loopNode.next;
 		}
+        // 如果每次都是删除第一个节点，则返回的应该是最后一个节点
+        if (m == 1) {
+            return head;
+        }
+        // 否则形成环状
 		loopNode.next = head;
 
-		// loop until there is only one node in the list
+		// 循环删除，直到最后只剩下一个节点
 		while (head.next != head) {
-			// first step: we need to find the node before the Mth node
+			// 先找到第m-1个节点
 			ListNode preNode = head;
 			for (int i = 0; i < m - 2; i++) {
 				preNode = preNode.next;
 			}
-			// the node to delete (the Mth node)
-			ListNode delNode = preNode.next;
-			// delete the Mth node
-			preNode.next = delNode.next;
-			// the next start node
+			// 删除第m个节点
+			preNode.next = preNode.next.next;
+			// 修改起点
 			head = preNode.next;
 		}
 		return head;
 	}
 
 	/**
-	 * we do not construct linked list, we use the standard library LinkedList;
-	 *      the key point is to get the next start number.
-	 * @param numberList    the LinkedList containing all te numbers
-	 * @param m delete the Mth number from the list
-	 * @param n the number of numbers in the list
-	 * @return  the last remaining number
+	 * 使用标准库的LinkedList模拟环形链表，遍历到最后一个元素后，返回到第一个元素，继续
+	 * @param numberList    包含n个数的链表
+	 * @param m 要删除的第m个数
+	 * @return  最后剩下的元素
 	 */
-	public int arrayListSolution(LinkedList<Integer> numberList, int m, int n) {
+	public int LinkedListMethod(LinkedList<Integer> numberList, int m) {
 		if (null == numberList || 0 == numberList.size()) {
 			return -1;
 		}
 
-		// start from 0
+		int n = numberList.size();
 		int start = 0;
 		while (n > 1) {
-			// get the index of the number to be deleted
+			// 要删除的元素
 			int delIndex = (start + m - 1) % n;
 			numberList.remove(delIndex);
 			n = numberList.size();
-			// get the index of the next start number
+			// 删除元素后，该索引对应的即为下一个元素
 			start = delIndex;
 			if (start >= n) {
 				start = 0;
@@ -83,90 +106,36 @@ public class LastNumberInCircle {
 	}
 
 	/**
-	 * using the math recursive and implementing by loop:
+	 * 使用循环实现由规律得出的公式：
 	 *      f(n,m) = f'(n-1,m) = (f(n-1,m)+m) % n;
-	 * @param numberList    the LinkedList containing all te numbers
-	 * @param m delete the Mth number from the list
-	 * @param n the number of numbers in the list
-	 * @return  the last remaining number in the list
+     * 因为数组的下标索引从0到n-1，所以返回的值即为最后元素在数组中的索引
+	 * @param m 要删除的第m个元素
+     * @param n 数组的大小
+	 * @return  数组中最后一个元素的索引
 	 */
-	public int mathSolutionByLoop(LinkedList<Integer> numberList, int m, int n) {
-		if (null == numberList || 0 == numberList.size()) {
-			return -1;
-		}
-		// f(1,m) = 0;
+	public int loopMethod(int m, int n) {
+
+		// 只有一个元素：f(1,m) = 0;
 		int last = 0;
-		// f(n,m) = (f(n-1,m) + m) % n;
+		// 有n个元素：f(n,m) = (f(n-1,m) + m) % n;
 		for (int i = 2; i <= n; i++) {
 			last = (last + m) % i;
 		}
-		return numberList.get(last);
+		return last;
 	}
 
 	/**
-	 * using the math recursive method, and implementing by recursion:
+	 * 使用递归实现由规律得到的公式：
 	 *      f(n,m) = (f(n-1,m) + m) % n
-	 * @param m the Mth element to delete in each recursion
-	 * @param n the number of numbers in the list
-	 * @return  the index of the last number in the list
+     * 因为数组的下标索引从0到n-1，所以返回的值即为最后元素在数组中的索引
+	 * @param m 要删除的第m个元素
+	 * @param n 数组中元素的个数
+	 * @return  最后一个元素在数组里的索引
 	 */
-	public int mathSolutionByRecursive(int m, int n) {
+	public int recursiveMethod(int n, int m) {
 		if (1 == n) {
 			return 0;
 		}
-		return (mathSolutionByRecursive(m, n - 1) + m) % n;
-	}
-
-
-	/**
-	 * just for testing
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		LastNumberInCircle lastInstance = new LastNumberInCircle();
-		ListNode head = new ListNode(4);
-		ListNode node1 = head.next = new ListNode(7);
-		ListNode node2 = node1.next = new ListNode(9);
-		ListNode node3 = node2.next = new ListNode(2);
-		ListNode node4 = node3.next = new ListNode(13);
-		ListNode node5 = node4.next = new ListNode(98);
-//		ListNode node6 = node5.next = new ListNode(6);
-		logger.info("1. last value is: {}", lastInstance.linkListSolution(head, 4).value);
-
-		LinkedList<Integer> numberList = new LinkedList<Integer>();
-		numberList.add(4);
-		numberList.add(7);
-		numberList.add(9);
-		numberList.add(2);
-		numberList.add(13);
-		numberList.add(98);
-//		numberList.add(6);
-		LinkedList<Integer> numberList2 = new LinkedList<Integer>();
-		numberList2.addAll(numberList);
-		logger.info("2. last value is: {}", lastInstance.arrayListSolution(numberList, 4, 6));
-		logger.info("3. last value is: {}", lastInstance.mathSolutionByLoop(numberList2, 4, 6));
-		int index = lastInstance.mathSolutionByRecursive(4, 6);
-		logger.info("4. last value is: {}", numberList2.get(index));
+		return (recursiveMethod(n-1, m) + m) % n;
 	}
 }
-
-/**
- *  问题描述：给定数字序列，长度为n，如0, 1, 2, ... , n-1构成一个圆圈，从第一个数字开始，
- *      每次从序列中删除第m个元素，删除一个元素后，从删除元素的下一个元素继续，问序列中最后剩下的元素。
- *   思路：
- *   1.  构造一个链表，每次从链表中删除第m个元素，直到链表总只剩最后一个元素。
- *       复杂度：O(n^2)；
- *   2.   从数学的角度寻找规律：
- *      f(n,m):  表示从n个元素的序列删除m个元素后最后剩下的元素；
- *      删除第m个元素后，序列变成了：0, 1, 2, ... , m-2, m, m+1, ..., n-1，即：
- *      m, m+1, ..., n-1, 0, 1, 2, ..., m-2
- *      将该序列使用f'(n-1,m)表示，显然有f(n,m) = f'(n-1,m)，因为最后剩下的数字时相同的。
- *      原序列为的f(n-1,m)为：
- *      0, 1, 2, ..., n-2
- *      可见从f(n-1,m)-->f'(n-1, m)的映射关系为：(f(n-1,m)+m)%n，综合：f(n,m) = f'(n-1,m)，得到：
- *      f(n,m) = f'(n-1,m) = (f(n-1),m) + m) % n;
- *      所以只要得到f(n-1,m)即可得到f(n,m)，而f(1,m) = 0;所以有：
- *      f(n,m) = f'(n-1,m) = (f(n-1),m) + m) % n;  (n > 1)
- *      然后递归或循环都可以实现。
- *       复杂度：O（n）
- *       */
