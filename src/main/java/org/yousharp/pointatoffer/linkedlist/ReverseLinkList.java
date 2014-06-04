@@ -3,7 +3,13 @@ package org.yousharp.pointatoffer.linkedlist;
 import org.yousharp.common.ListNode;
 
 /**
- * 问题：反转单链表
+ * 问题描述：
+ *  将单链表翻转，输出翻转后链表的头节点
+ *
+ * 思路：
+ *  使用三个指针即可：当前指针，前一节点指针和后一节点指针。修改指针的指向，并向后移动指针，知道
+ *  遍历结束。复杂度O(n)。
+ *
  * User: lingguo
  * Date: 14-3-17
  * Time: 下午9:03
@@ -11,37 +17,20 @@ import org.yousharp.common.ListNode;
 public class ReverseLinkList {
 
 	/**
-	 * reverse a linked list
-	 * @param head  the head of the linked list
-	 * @return  the head of the reversed list
+	 * 翻转单链表
+	 * @param head  链表的头节点
+	 * @return  翻转后的链表的头节点
 	 */
 	public static ListNode reverse(ListNode head) {
-		// if the list is null or the list has only one node
-		if (head == null || head.next == null) {
-			return head;
-		}
-
 		// we need to record three pointers: the current one, the previous and the next
 		ListNode previous = null;
-		while (head != null) {
-			ListNode next = head.next;
-			head.next = previous;
-			previous = head;
-			head = next;
+        ListNode current = head;
+		while (current != null) {
+			ListNode next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
 		}
 		return previous;
-	}
-
-	public static void main(String[] args) {
-		ListNode head = new ListNode(10);
-		head.next = new ListNode(20);
-		head.next.next = new ListNode(30);
-		head.next.next.next = new ListNode(40);
-
-		ListNode newHead = ReverseLinkList.reverse(head);
-		while (newHead != null) {
-			System.out.println(newHead.value + "->");
-			newHead = newHead.next;
-		}
 	}
 }

@@ -1,15 +1,20 @@
 package org.yousharp.pointatoffer.linkedlist;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yousharp.common.ListNode;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * 题目描述：
- * 给定一个链表，逆序输出节点的值
+ *  逆序打印链表的值
+ *
+ * 思路：
+ *  思路一：逆序打印，链表中的节点后进先出，栈的特点。
+ *  思路二：栈和递归本质上一致，所以可以直接使用递归实现
+ *  复杂度O(n)。
  * User: Daniel
  * Date: 13-12-8
  * Time: 下午9:04
@@ -18,30 +23,29 @@ public class PrintLinkedListReversely {
 	private static Logger logger = LoggerFactory.getLogger(PrintLinkedListReversely.class);
 
 	/**
-	 * implement by stack
-	 * note: LinkedList can be used as both stack and queue in Java
-	 * @param head the head of the link list
-	 */
+	 * 使用栈逆序打印链表中的值
+	 * @param head 链表的头节点
+    */
 	public static void stackImpl(LinkedList<Integer> head) {
 		if (null == head) {
 			return;
 		}
-		LinkedList<Integer> tmp = new LinkedList<Integer>();
-
-		Iterator<Integer> iter = head.iterator();
-		while (iter.hasNext()) {
-			tmp.push(iter.next());
+        // LinkedList作为栈
+		LinkedList<Integer> stack = new LinkedList<Integer>();
+        // 入栈
+		Iterator<Integer> it = head.iterator();
+		while (it.hasNext()) {
+			stack.push(it.next());
 		}
-
-		while (!tmp.isEmpty()) {
-			logger.info("node: {}", tmp.pop());
+        // 出栈
+		while (!stack.isEmpty()) {
+			logger.info("node: {}", stack.pop());
 		}
 	}
 
 	/**
-	 * recursive implementation
-	 * be care of stack overflow
-	 * @param head
+	 * 递归地思路：逆序打印链表的节点
+	 * @param head  链表的头节点
 	 */
 	public static void recursionImpl(ListNode head) {
 		if (null == head) {
@@ -50,27 +54,4 @@ public class PrintLinkedListReversely {
 		recursionImpl(head.next);
 		logger.info("node: {}", head.value);
 	}
-
-	/**
-	 * test
-	 *
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		list.add(10);
-		list.add(20);
-		list.add(30);
-		list.add(40);
-
-		stackImpl(list);
-
-	}
 }
-
-/**
- * 思路：
- * 1. 反转链表，如果允许改变输入的结构；
- * 2. 将链表元素保存在数组里，倒序输出。（后进先出，不是栈么？）
- * 3. 递归的本质也是栈。（不过递归要注意栈溢出）
- */
