@@ -1,13 +1,26 @@
 package org.yousharp.pointatoffer.tree;
 
-import java.util.LinkedList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yousharp.common.TreeNode;
 
+import java.util.LinkedList;
+
 /**
- * find the first common parent node of given two nodes in a binary tree.
+ * 问题描述：
+ *    给定二叉树中的两个节点，求这两个节点的第一个公共父节点。
+ *
+ * 思路：
+ *   如果只是一棵普通的二叉树，有两种思路：
+ *      思路一：遍历二叉树，分别计算从根节点到这两个节点的路径，如果这两个节点的公共父节点存在
+ *       ，则这两条路径肯定是相交的，第一个公共父节点就是这两条路径的最后一个交点。
+ *      思路二：两个节点的第一个公共父节点有一个特点：这两个节点，一个在其左子树中，另一个在其
+ *       右子树中。从根节点开始遍历，如果两个节点都在当前节点的左子树中，则遍历其左子树，如果两
+ *       个节点都在当前节点的右子树中，则遍历右子树，如果一个在其左子树，另一个在其右子树，则当
+ *       前节点即为所求。
+ *   如果这是一棵特殊的二叉树，如搜索二叉树，即节点的值大于左节点的值，而小于右节点的值，根据这个
+ *   特点，层次遍历二叉树，寻找第一个满足这个条件的节点即可。
+ *
  * User: Daniel
  * Date: 14-1-12
  * Time: 下午8:28
@@ -15,14 +28,83 @@ import org.yousharp.common.TreeNode;
 public class FirstCommonParent {
 	private static Logger logger = LoggerFactory.getLogger(FirstCommonParent.class);
 
+    /**
+     *  方法一：已知根节点到两个节点的路径后，它们的第一个公共父节点即两条路径的最后一个
+     *  交点
+     *
+     * @param root
+     * @param first
+     * @param second
+     * @return
+     */
+    public TreeNode pathIntersection(TreeNode root, TreeNode first, TreeNode second) {
+        if (null == root || null == first || null == second) {
+            return null;
+        }
+
+        LinkedList<TreeNode> firstPath = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> secondPath = new LinkedList<TreeNode>();
+
+        //  获取路径
+        boolean isLeftFound = getTreePath(root, first, firstPath);
+        boolean isRightFound = getTreePath(root, second, secondPath);
+
+        //  计算两条路径的最后一个交点
+        if (isLeftFound && isRightFound) {
+            for (int i = 0; i < firstPath.size() && i < secondPath.size(); i++) {
+                if (firstPath.get(i) != secondPath.get(i)) {
+                    return firstPath.get(i-1);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     *   方法一：遍历二叉树，计算根节点到某一节点的路径
+     *
+     * @param root
+     * @param node
+     * @param path
+     * @return
+     */
+    public static boolean getTreePath(TreeNode root, TreeNode node, LinkedList<TreeNode> path) {
+        if (null == root) {
+            return  false;
+        }
+
+        //  将当前节点加入到路径中
+        path.add(root);
+
+        //   当前节点即是，则返回
+        if (node == root) {
+            return true;
+        }
+
+        //  当前节点不是，递归查找左子树和右子树
+        boolean isFound = false;
+        isFound = getTreePath(root.left, node, path);
+        if (!isFound) {
+            isFound = getTreePath(root.right, node, path);
+        }
+
+        //  当前节点及其左右子树中都没有该节点，从路径中去掉该节点，继续遍历
+        if (!isFound) {
+            path.remove(root);
+        }
+        return isFound;
+    }
+
 	/**
-	 * if the tree is a binary search tree, find the first common parent
-	 * @param root  root node of the tree
-	 * @param first the first node
-	 * @param second    the second node
+	 *  方法二：如果是搜索二叉树，则遍历二叉树，比较节点的值，查找第一个节点，该节点的
+     *  值介于两个节点的值之间。
+     *
+	 * @param root
+	 * @param first
+	 * @param second
 	 * @return
 	 */
-	public TreeNode findFirstCommonInBinarySearchTree(TreeNode root, TreeNode first, TreeNode second) {
+	public TreeNode findInBSTree(TreeNode root, TreeNode first, TreeNode second) {
 		// check params
 		if (null == root || null == first || null == second) {
 			return null;
@@ -57,109 +139,5 @@ public class FirstCommonParent {
 		return null;    // not found
 	}
 
-	/**
-	 * if it is an ordinary binary tree, we first find out the path from the root to the
-	 * two leaf node, then find the last common node of the two paths.
-	 * @param root  the root of the binary tree
-	 * @param first the first leaf node
-	 * @param second    the second leaf node
-	 * @return
-	 */
-	public TreeNode findFirstCommonParentInOrdinaryTree(TreeNode root, TreeNode first, TreeNode second) {
-		if (null == root || null == first || null == second) {
-			return null;
-		}
 
-		// paths to the first and second leaf from root
-		LinkedList<TreeNode> firstPath = new LinkedList<TreeNode>();
-		LinkedList<TreeNode> secondPath = new LinkedList<TreeNode>();
-
-		// get paths
-		boolean isLeftFound = getTreePath(root, first, firstPath);
-		boolean isRightFound = getTreePath(root, second, secondPath);
-
-		// if two path are found, find out the last common node
-		if (isLeftFound && isRightFound) {
-			for (int i = 0; i < firstPath.size() && i < secondPath.size(); i++) {
-				if (firstPath.get(i) != secondPath.get(i)) {
-					return firstPath.get(i-1);
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * in a binary tree, find the path from the root to a given leaf
-	 * @param root  the root of the binary tree
-	 * @param leaf  the leaf
-	 * @param path  the path
-	 * @return
-	 */
-	public boolean getTreePath(TreeNode root, TreeNode leaf, LinkedList<TreeNode> path) {
-		// not found
-		if (null == root) {
-			return  false;
-		}
-		// found
-		if (leaf == root) {
-			return true;
-		}
-
-		// add the node to path
-		boolean isFound = false;
-		path.add(root);
-
-		// find in children
-		isFound = getTreePath(root.left, leaf, path);
-		if (!isFound) {
-			isFound = getTreePath(root.right, leaf, path);
-		}
-
-		// there is no path from the current node to the leaf
-		if (!isFound) {
-			path.remove(root);
-		}
-		return isFound;
-	}
-
-
-	public static void main(String[] args) {
-		TreeNode root = new TreeNode(15);
-		root.left = new TreeNode(10);
-		root.right = new TreeNode(33);
-		root.left.left = new TreeNode(7);
-		root.left.right = new TreeNode(12);
-		TreeNode first = root.left.left.left = new TreeNode(4);
-		root.left.left.right = new TreeNode(8);
-		root.left.right.left = new TreeNode(11);
-		TreeNode second = root.left.right.right = new TreeNode(14);
-
-		FirstCommonParent commonParent = new FirstCommonParent();
-		TreeNode parentOne = commonParent.findFirstCommonInBinarySearchTree(root, first, second);
-		TreeNode parentTwo = commonParent.findFirstCommonParentInOrdinaryTree(root, first, second);
-		if (null != parentOne) {
-			logger.info("parentOne: {}", parentOne.value);
-		}
-		if (null != parentTwo) {
-			logger.info("parentTwo: {}", parentTwo.value);
-		}
-		return;
-	}
 }
-
-/**
- *  思路：求树的任意两个节点的最低公共祖先，树的特点不同，具体的解法也不相同：
- *  1. 如果是二叉搜索树，找到一个节点N，如果两个节点分别为该节点N的左右孩子，则该节点N为两个节点的最低公共祖先。
- *  2.  如果是非二叉搜索树，但每一个节点都有指向父节点的指针，则这两个节点到根节点就是两个链表，则问题转化为求
- *       两个单链表的第一个公共节点。
- *  3.  如果知识普通的二叉树，则可以先求得根节点到着两个节点的路径，问题转化为求这两条路径的最后一个公共节点。
- *  4.  如果不是二叉树，而只是普通的树结构（多个孩子），同样使用情形3的思路，不同的是，在寻找路径的时候，需要遍历
- *       当前节点的所有孩子，而不是二叉树时的左右孩子。示例代码如：
- *       int i = 0;
- *       while (!isFound && i < root.childList.size()) {
- *           isFound = getTreePath(root.childList.get(i++);
- *       }
- *
- *
- */

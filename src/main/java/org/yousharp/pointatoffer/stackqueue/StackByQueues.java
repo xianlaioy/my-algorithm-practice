@@ -2,29 +2,26 @@ package org.yousharp.pointatoffer.stackqueue;
 
 import java.util.LinkedList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.yousharp.common.ListNode;
-import org.yousharp.common.Queue;
-import org.yousharp.common.Stack;
-
-import sun.util.logging.resources.logging;
-
 /**
- * implement stack by two queues
- * User: Daniel
+ *  问题描述：
+ *       使用两个队列实现栈的入栈和出栈操作；
+ *
+ *   思路：
+ *       始终维持一个队列为空，一个队列非空；入栈的时候向非空的队列插入一个元素；出栈的时候，将非空
+ *        队列中的所有元素（除队尾元素外，此元素为栈顶元素）都依次出队并插入到非空队列中。
+ *
+ * Usr: Daniel
  * Date: 13-12-15
  * Time: 上午11:19
  */
 public class StackByQueues {
-	private static Logger logger = LoggerFactory.getLogger(StackByQueues.class);
-
 	private static LinkedList<Integer> firstQueue = new LinkedList<Integer>();
 	private static LinkedList<Integer> secondQueue = new LinkedList<Integer>();
 
+    private static final int ERROR_FLAG = Integer.MAX_VALUE;
+
 	/**
-	 * push an element to the stack
-	 * the queue which is un-empty, is used to add elements
+	 *  入栈：向非空队列插入一个元素
 	 *
 	 * @param element
 	 */
@@ -37,15 +34,13 @@ public class StackByQueues {
 	}
 
 	/**
-	 * pop and element of the stack
-	 * the last element of the queue which is not empty is ready to pop
+	 *  出栈：将非空队列除尾元素外的所有元素都出队并入队到另一个空队列中。
 	 *
 	 * @return
 	 */
 	public static int pop() {
 		if (firstQueue.isEmpty() && secondQueue.isEmpty()) {
-			logger.info("error: the stack is empty.");
-			return Integer.MAX_VALUE;
+			return ERROR_FLAG;
 		}
 		if (firstQueue.isEmpty()) {
 			while (secondQueue.size() != 1) {
@@ -64,26 +59,4 @@ public class StackByQueues {
 		return Integer.MAX_VALUE;
 	}
 
-
-
-
-	/**
-	 * for test
-	 *
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		StackByQueues.push(10);
-		StackByQueues.push(20);
-		StackByQueues.push(30);
-		logger.info("{},{},{}", StackByQueues.pop(), StackByQueues.pop(), StackByQueues.pop(), StackByQueues.pop());
-
-	}
 }
-
-/**
- *  思路：两个队列q1和q2，向q1里压入3个元素a, b, c，如果需要弹出最后压入的元素，即a，
- *  此时，先将q1中除头部(即a元素)外的所有元素都出队列，并入队到q2，将q1仅有的一个元素出队；再出栈，将
- *  q2中的除头部元素(即b元素)外的所有元素都出队并入队到q1，q2仅有的元素出队，即可模仿出栈操作；模仿入栈，
- *  两个队列始终有一个为空，非空的队列入队一个元素，即为入栈了。
- */

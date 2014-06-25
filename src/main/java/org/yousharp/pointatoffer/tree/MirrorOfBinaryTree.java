@@ -1,13 +1,20 @@
 package org.yousharp.pointatoffer.tree;
 
-import java.util.LinkedList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yousharp.common.TreeNode;
 
+import java.util.LinkedList;
+
 /**
- * 问题描述：求二叉树的镜像
+ * 问题描述：
+ *  求二叉树的镜像
+ *
+ * 思路：
+ *  二叉树的镜像，就是将二叉树的每一个节点的左右子节点交换；具体实现上：
+ *  算法一：通过递归，先序遍历，当节点不为空时，将左右子节点互换；
+ *  算法二：递归的本质也是栈，遍历的方式对结果不影响，所以可以通过层次遍历，将
+ *  节点保存在栈中，然后将栈中的每一个节点的左右子节点互换；
  *
  * User: Daniel
  * Date: 13-12-22
@@ -18,31 +25,31 @@ public class MirrorOfBinaryTree {
 	private static Logger logger = LoggerFactory.getLogger(MirrorOfBinaryTree.class);
 
 	/**
-	 * recursion method
+	 * 通过递归的思路，先序遍历每一个节点，互换节点的左右子节点；
 	 *
-	 * @param root  the root of the tree
+	 * @param root
 	 */
 	private static void mirrorByRecursion(TreeNode root) {
 		if (null == root) {
 			return;
 		}
 
-		// swap left child and right child of the current node
+		// 节点不为空，则交换其左右子节点
 		TreeNode leftBak = root.left;
 		root.left = root.right;
 		root.right = leftBak;
 
-		// swap left child tree and right child tree by recursion
+		// 递归遍历左右子树
 		mirrorByRecursion(root.left);
 		mirrorByRecursion(root.right);
 	}
 
 	/**
-	 * loop method: with the help of a stack, traverse the tree breadth-first
+	 * 借助栈，使用层次遍历的思路，遍历每一个节点，并交换其左右子节点；
 	 *
-	 * @param root the root of the tree
+	 * @param root
 	 */
-	public static void mirrorByLoop(TreeNode root) {
+	public static void mirrorByStack(TreeNode root) {
 		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
 		stack.push(root);   // push the root to the stack
 		while (!stack.isEmpty()) {
@@ -60,20 +67,4 @@ public class MirrorOfBinaryTree {
 		}
 	}
 
-
-	public static void main(String[] args) {
-		TreeNode head = new TreeNode(8);
-		head.left = new TreeNode(6);
-		head.right = new TreeNode(10);
-		head.left.left = new TreeNode(5);
-		head.left.right = new TreeNode(7);
-		head.right.left = new TreeNode(9);
-		head.right.right = new TreeNode(11);
-
-
-		TraverseBinaryTreeByTier.traverse(head);
-//		MirrorOfBinaryTree.mirrorByRecursion(head);
-		MirrorOfBinaryTree.mirrorByLoop(head);
-		TraverseBinaryTreeByTier.traverse(head);
-	}
 }
