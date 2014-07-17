@@ -31,6 +31,7 @@ public class PrintMatrixClockWise {
 	/**
 	 * 顺时针打印矩阵，分为四步：左->右，上->下，右->左，下->上，每一步
      * 使用试探法，通过矩阵的行数、列数作为限制，遍历矩阵。
+     *
 	 * @param matrix    矩阵
 	 * @param rows  矩阵的行数
 	 * @param cols  矩阵的列数
@@ -44,42 +45,44 @@ public class PrintMatrixClockWise {
 			}
 		}
 
-		int i = 0;
-		int j = -1;
-		int k = 0;
+        // 第一个元素为matrix[rowIndex][colIndex]在矩阵之外
+		int rowIndex = 0;
+		int colIndex = -1;
+		int matrixIndex = 0;
 		// 遍历矩阵
-		while (k++ < rows * cols) {
+		while (matrixIndex++ < rows * cols) {
 			// 左到右的一行
-			while (j + 1 < cols && !visited[i][j+1]) {
-				logger.info("{} ", matrix[i][++j]);
-				visited[i][j] = true;
+			while (colIndex + 1 < cols && !visited[rowIndex][colIndex+1]) {
+				printElement(matrix[rowIndex][++colIndex]);
+				visited[rowIndex][colIndex] = true;
 			}
 			// 上到下的一列
-			while (i + 1 < rows && !visited[i+1][j]) {
-				logger.info("{} ", matrix[++i][j]);
-				visited[i][j] = true;
+			while (rowIndex + 1 < rows && !visited[rowIndex+1][colIndex]) {
+				printElement(matrix[++rowIndex][colIndex]);
+				visited[rowIndex][colIndex] = true;
 			}
 
 			// 右到左的一行
-			while (j - 1 >= 0 && !visited[i][j-1]) {
-				logger.info("{} ", matrix[i][--j]);
-				visited[i][j] = true;
+			while (colIndex - 1 >= 0 && !visited[rowIndex][colIndex-1]) {
+                printElement(matrix[rowIndex][--colIndex]);
+				visited[rowIndex][colIndex] = true;
 			}
+
             // 下到上的一列
-			while (i - 1 >= 0 && !visited[i-1][j]) {
-				logger.info("{} ", matrix[--i][j]);
-				visited[i][j] = true;
+			while (rowIndex - 1 >= 0 && !visited[rowIndex-1][colIndex]) {
+                printElement(matrix[--rowIndex][colIndex]);
+				visited[rowIndex][colIndex] = true;
 			}
 		}
 	}
 
-	public static void main(String[] args) {
-		int[][] matrix = new int[][] {
-				{1, 2, 3, 4},
-				{5, 6, 7, 8},
-				{9, 10, 11, 12},
-				{13, 14, 15, 16}};
+    /**
+     * 根据需要的格式打印一个元素
+     *
+     * @param element
+     */
+    private static void printElement(int element) {
+        logger.info("->" + element);
+    }
 
-		PrintMatrixClockWise.print(matrix, 4, 4);
-	}
 }

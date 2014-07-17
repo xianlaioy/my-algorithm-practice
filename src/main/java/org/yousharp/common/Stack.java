@@ -1,8 +1,8 @@
 package org.yousharp.common;
 
 /**
- * stack definition using link list
- * top->next->next->...
+ * 链表的定义
+ *
  * User: Daniel
  * Date: 13-12-14
  * Time: 上午9:01
@@ -11,7 +11,8 @@ public class Stack {
 	public ListNode top;
 
 	/**
-	 * get the first node of the stack
+	 * 返回栈顶
+     *
 	 * @return
 	 */
 	public ListNode peek() {
@@ -22,7 +23,8 @@ public class Stack {
 	}
 
 	/**
-	 * push a new node to the stack
+	 * 入栈
+     *
 	 * @param newNode
 	 */
 	public void push(ListNode newNode) {
@@ -33,7 +35,8 @@ public class Stack {
 	}
 
 	/**
-	 * 
+	 * 出栈
+     *
 	 * @return
 	 */
 	public ListNode pop() {
@@ -46,7 +49,8 @@ public class Stack {
 	}
 
 	/**
-	 * return the size of the queue
+	 * 返回栈的大小
+     *
 	 * @return
 	 */
 	public int size() {

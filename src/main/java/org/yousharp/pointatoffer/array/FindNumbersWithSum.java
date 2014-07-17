@@ -15,10 +15,6 @@ import org.slf4j.LoggerFactory;
  *  最小的元素，不断扩展，直到序列终止；那么，序列何时终止呢？因为序列至少两个数，两个数的和不能大于s，所以序列的最大边
  *  界值即为s/2。
  *
- * 同类问题：
- *  给定递增数组data和数值s，在数组中寻找两个数，使其和为s，如果有多对符合条件的数对，都打印出来。
- *  思路：设置两个元素指针，一个指向数组的首元素，一个指向数组尾元素，求其和并与s比较，如果大于s，尾元素指针前移，否则，
- *  首元素指针后移，直到两个指针元素相遇；
  */
 public class FindNumbersWithSum {
 	private Logger logger = LoggerFactory.getLogger(FindNumbersWithSum.class);
@@ -48,7 +44,11 @@ public class FindNumbersWithSum {
 	}
 
     /**
-     * 给定递增数组data[]和数字sum，在数组中寻找两个数，它们的和为sum，如果有多对，输出任意一对。
+     *  * 同类问题：
+     *  给定递增数组data和数值s，在数组中寻找两个数，使其和为s，如果有多对符合条件的数对，都打印出来。
+     *  思路：设置两个元素指针，一个指向数组的首元素，一个指向数组尾元素，求其和并与s比较，如果大于s，尾元素指针前移，否则，
+     *  首元素指针后移，直到两个指针元素相遇；
+     *
      * @param data  递增数组
      * @param size  数组的大小
      * @param sum   数字之和
@@ -72,15 +72,6 @@ public class FindNumbersWithSum {
 
     }
 
-	public static void main(String[] args) {
-		int[] data = new int[] {2, 3, 5, 8, 9, 11, 23};
-		int sum = 13;
-
-		FindNumbersWithSum findInstance = new FindNumbersWithSum();
-		findInstance.findPairSum(data, 7, sum);
-		findInstance.findContinuousSum(15);
-
-	}
 }
 
 

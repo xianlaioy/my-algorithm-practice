@@ -1,8 +1,9 @@
 package org.yousharp.designpattern.singleton;
 
 /**
- * 通过内部类实现单例模式，只有需要时才会创建示例；
+ * 通过内部类实现单例模式，只有需要时才会创建实例；
  * 如果需要使用单例模式，强烈推荐这种实现方式。
+ *
  * User: Daniel
  * Date: 13-12-5
  * Time: 下午10:04

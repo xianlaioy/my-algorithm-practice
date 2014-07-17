@@ -5,12 +5,14 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 问题描述：
- *  计算 pow(double base, int exponent)，即base的exponent次方；
+ *  计算 pow(double base, int ex)，即base的ex次方；
  *  忽略大数问题，不得使用库函数
+ *
  * 思路：
  *  题目不难，但需要注意几个问题：
- *  1. exponent可以为正值，也可以为负值，当为负值时，需要base是否为0（浮点数的比较问题）；
- *  2. 求幂次方时，从平方（折半）的角度，可以提高效率
+ *  1. exponent可以为正值，也可以为负值，当为负值时，需要判断base是否为0（浮点数的比较问题）；
+ *  2. 求幂次方时，二分平方的思路，非常棒。
+ *
  * User: Daniel
  * Date: 13-12-18
  * Time: 下午11:30
@@ -22,6 +24,7 @@ public class CalculatePow {
 
 	/**
 	 * 计算浮点数base的exponent次幂，不考虑大数（溢出）问题
+     *
 	 * @param base
 	 * @param exponent
 	 * @return  -1表示异常，否则，返回值为结果值
@@ -40,7 +43,7 @@ public class CalculatePow {
 		if (exponent < 0) {
 			absExponent = -exponent;
 		}
-		double result = positivePow(base, absExponent);
+		double result = recurPowOne(base, absExponent);
 
 		// 如果exponent为负值，取其倒数
 		if (exponent < 0) {
@@ -50,25 +53,45 @@ public class CalculatePow {
 	}
 
 	/**
-	 * 通过平方的思路计算幂值（指数exponent为正值）：
+	 * 计算base的ex次方，其中ex为整数，二分法，地推实现：
 	 *  如果指数为偶数, b^e = b^(e/2) * b^(e/2)
 	 *  如果指数为奇数, b^e = b^(e/2) * b^(e/2) * b
 	 *  这比通过循环求幂值的效率要好一些，可以通过递归来实现。
+     *
 	 * @param base
-	 * @param exponent
+	 * @param ex
 	 * @return
 	 */
-	private double positivePow(double base, int exponent) {
-		if (exponent == 1) {
+	public static double recurPowOne(double base, int ex) {
+		if (ex == 1) {
 			return base;
 		}
-		double result = positivePow(base, exponent >> 1);
+		double result = recurPowOne(base, ex >> 1);
 		result *= result;               // 先计算平方
-		if ((exponent & 0x1) == 1) {   // 如果指数exponent为奇数，平方外应该再乘以base
+		if ((ex & 0x1) == 1) {   // 如果指数exponent为奇数，平方外应该再乘以base
 			result *= base;
 		}
 		return result;
 	}
+
+    /**
+     * 计算base的ex次方，ex为正数，递归的另一种实现方式，更直观
+     *
+     * @param base
+     * @param ex
+     * @return
+     */
+    public static double recurPowTwo(double base, int ex) {
+        if (ex == 1) {
+            return base;
+        }
+        // 根据奇偶分支
+        if ((ex & 1) == 1) {
+            return recurPowTwo(base, ex >> 1) * recurPowTwo(base, ex >> 1) * base;
+        } else {
+            return recurPowTwo(base, ex >> 1) * recurPowTwo(base, ex >> 1);
+        }
+    }
 
 	/**
 	 * 比较两个浮点数是否相等

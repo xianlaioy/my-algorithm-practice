@@ -1,10 +1,8 @@
 package org.yousharp.common;
 
 /**
- * queue definition using LinkList
- * tail->next->...->front
- * enqueue: add a node to front
- * dequeue: delete a node from tail
+ * 基本数据结构：队列的实现
+ *
  * User: Daniel
  * Date: 13-12-14
  * Time: 上午11:12
@@ -14,36 +12,41 @@ public class Queue {
 	public ListNode tail;
 
 	/**
-	 * add a node to the queue, check if the queue is empty
-	 * front.next = newNode; front = newNode;
+	 * 入队：节点插入到队列的头部
+     *
 	 * @param newNode
 	 */
 	public void enqueue(ListNode newNode) {
-		if (null != newNode) {
-			if (null == front) {
-				front = newNode;
-				tail = front;
-			} else {
-				front.next = newNode;
-				front = newNode;
-			}
-		}
+        // 快速失败
+        if(null == newNode) {
+            return;
+        }
+
+        if (null == front) {
+            front = newNode;
+            tail = front;
+        } else {
+            front.next = newNode;
+            front = newNode;
+        }
 	}
 
 	/**
-	 * remove a node from the queue
-	 * you have to judge if the queue is empty and if the queue has
-	 * only one element, in which case, front == tail
+	 * 出队：删除的是队尾的元素(如果删除队头元素，会比较麻烦一些)
+     *
 	 * @return
 	 */
 	public ListNode dequeue() {
-		// the queue has more than one elements
+        if (front == null) {
+            return null;
+        }
+		// 队列中有多个元素
 		if (front != tail) {
 			ListNode tailBak = new ListNode(tail.value);
 			tail = tail.next;
 			return tailBak;
-		// the queue contains only one element
-		} else if (front == tail && null != front) {
+		// 队列中只有一个元素
+		} else if (front == tail) {
 			ListNode tailBak = new ListNode(tail.value);
 			front = null;
 			tail = null;
@@ -53,20 +56,21 @@ public class Queue {
 	}
 
 	/**
-	 * return the size of the queue
+	 * 返回队列的大小
+     *
 	 * @return
 	 */
 	public int size() {
 		int size = 0;
-		if (null == tail) {    // the queue is empty
+		if (null == tail) {
 			return size;
 		}
-		size++;
 		ListNode tailBak = tail;
 		while (tailBak != front) {
 			size++;
 			tailBak = tailBak.next;
 		}
+        size++;
 		return size;
 	}
 }

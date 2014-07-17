@@ -24,20 +24,21 @@ import org.slf4j.LoggerFactory;
  * Time: 下午11:04
  */
 public class PrintMatrixDiagonally {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static Logger logger = LoggerFactory.getLogger(PrintMatrixDiagonally.class);
 
     /**
      * 以对角线的方式打印n*n矩阵
+     *
      * @param data  矩阵数组
      * @param n 矩阵的维度
      */
-    public void print(int[][] data, int n) {
+    public static void print(int[][] data, int n) {
         // 打印右上部分
         for (int i = n - 1; i >= 0; i--) {
             int row = 0;
             int col = i;
             while ((row >= 0 && row < n) && (col >= 0 && col < n)) {
-                System.out.println(data[row][col]);
+                printElement(data[row][col]);
                 row++;
                 col++;
             }
@@ -48,10 +49,19 @@ public class PrintMatrixDiagonally {
             int row = i;
             int col = 0;
             while ((row >= 0 && row < n) && (col >= 0 && col < n)) {
-                System.out.println(data[row][col]);
+                printElement(data[row][col]);
                 row++;
                 col++;
             }
         }
+    }
+
+    /**
+     * 打印一个元素
+     *
+     * @param element
+     */
+    private static void printElement(int element) {
+        logger.info("->{}", element);
     }
 }
