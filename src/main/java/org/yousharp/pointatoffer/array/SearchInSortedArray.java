@@ -20,16 +20,17 @@ package org.yousharp.pointatoffer.array;
  * Date: 13-12-5
  * Time: 下午11:16
  */
-public class SearchInTwoDimensionArray {
+public class SearchInSortedArray {
 	/**
 	 * 在二维数组中查找元素
+     *
 	 * @param array  二维数组
 	 * @param row    数组的行
 	 * @param col 数组的列
 	 * @param key    待查找的元素
 	 * @return 存在则返回true，否则返回false
 	 */
-	private static boolean searchInTwoDimensionArray(int[][] array, int row, int col, int key) {
+	public static boolean search(int[][] array, int row, int col, int key) {
 		int i = row - 1, j = 0;
 		while (i >= 0 && j <= col - 1) {
 			if (array[i][j] == key) {
