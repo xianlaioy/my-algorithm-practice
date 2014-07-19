@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yousharp.common.ListNode;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * 问题描述：
@@ -14,23 +14,25 @@ import java.util.LinkedList;
  * 思路：
  *  思路一：构造环形链表，每个节点有两个属性，一个是值，另一个是指向下一个元素的指针。每次从
  *  环中删除第m个元素，直到链表中剩下一个元素。复杂度O(m*n)；
+ *
  *  思路二：也是用链表模拟环，使用标准库的LinkedList，每次遍历到最后一个元素后，继续遍历链表
- *  第一个元素；
+ *  第一个元素；时间和空间复杂度均为O(n)；
+ *
  *  思路三：寻找规律：f(n,m)表示从n个数(0,1,2,...,n-1)的环中删除第m个数后剩下的数；第一
  *  次删掉了的元素为k（显然，k=m-1），剩下的元素为(k+1,k+2,...,n-1, 0, 1, ...,k-1)，此时
- *  的序列有n-1个元素，但排列不同，从该序列每次删除第m个元素后最后剩下的元素记为f'(n-1,m)，则有
- *  f(n,m)=f'(n-1,m)，但是我们将f'(n-1,m)与f(n-1,m)（序列为0,1,2,...,n-2)做一下映射，找规律：
- *      f'(n-1,m)       f(n-1,m)
+ *  的序列有n-1个元素，但排列不同，从该序列每次删除第m个元素后最后剩下的元素记为g(n-1,m)，则有
+ *  f(n,m)=g(n-1,m)，但是我们将g(n-1,m)与f(n-1,m)（序列为0,1,2,...,n-2)做一下映射，找规律：
+ *      g(n-1,m)       f(n-1,m)
  *      k+1             0
  *      k+2             1
  *      ...             ...
  *      k-2             n-3
  *      k-1             n-2
- *  发现的映射规律为：[f(n-1,m) + (k+1)] % n = f'(n-1,m)
- *  将该公式以及(k=m-1)与f(n,m)=f'(n-1,m)组合，有：
+ *  发现的映射规律为：[f(n-1,m) + (k+1)] % n = g(n-1,m)
+ *  将该公式以及(k=m-1)与f(n,m)=g(n-1,m)组合，有：
  *  f(n,m) = [f(n-1)+m]%n
  *  即如果要求f(n,m)，可以先求f(n-1)，得到的递归公式为：
- *      f(n,m) = [f(n-1,m)+m]%n, (n=1, f(n,m)=0)
+ *      f(n,m) = [f(n-1,m)+m]%n, (其中，f(1,m)=0)
  *  利用该公式，使用递归或者循环很容易解决。复杂度O(n)
  *
  * User: Daniel
@@ -42,11 +44,12 @@ public class LastNumberInCircle {
 
 	/**
 	 * 自定义链表节点，形成环状，每次从环中删除第m个节点，直到环中只剩下一个节点
+     *
 	 * @param head  头节点
 	 * @param m 要删除的第m个节点
 	 * @return  最后剩下的节点
 	 */
-	public ListNode ListNodeMethod(ListNode head, int m) {
+	public static ListNode findByBuildingList(ListNode head, int m) {
 		if (null == head || m <= 0) {
 			return null;
 		}
@@ -58,7 +61,7 @@ public class LastNumberInCircle {
 		}
         // 如果每次都是删除第一个节点，则返回的应该是最后一个节点
         if (m == 1) {
-            return head;
+            return loopNode;
         }
         // 否则形成环状
 		loopNode.next = head;
@@ -80,12 +83,14 @@ public class LastNumberInCircle {
 
 	/**
 	 * 使用标准库的LinkedList模拟环形链表，遍历到最后一个元素后，返回到第一个元素，继续
+     *
 	 * @param numberList    包含n个数的链表
 	 * @param m 要删除的第m个数
 	 * @return  最后剩下的元素
 	 */
-	public int LinkedListMethod(LinkedList<Integer> numberList, int m) {
+	public static int findByArrayList(ArrayList<Integer> numberList, int m) {
 		if (null == numberList || 0 == numberList.size()) {
+            logger.error("param error.");
 			return -1;
 		}
 
@@ -102,18 +107,19 @@ public class LastNumberInCircle {
 				start = 0;
 			}
 		}
-		return numberList.getLast();
+		return numberList.get(0);
 	}
 
 	/**
 	 * 使用循环实现由规律得出的公式：
 	 *      f(n,m) = f'(n-1,m) = (f(n-1,m)+m) % n;
      * 因为数组的下标索引从0到n-1，所以返回的值即为最后元素在数组中的索引
+     *
 	 * @param m 要删除的第m个元素
      * @param n 数组的大小
 	 * @return  数组中最后一个元素的索引
 	 */
-	public int loopMethod(int m, int n) {
+	public static int findByLoop(int n, int m) {
 
 		// 只有一个元素：f(1,m) = 0;
 		int last = 0;
@@ -128,14 +134,15 @@ public class LastNumberInCircle {
 	 * 使用递归实现由规律得到的公式：
 	 *      f(n,m) = (f(n-1,m) + m) % n
      * 因为数组的下标索引从0到n-1，所以返回的值即为最后元素在数组中的索引
+     *
 	 * @param m 要删除的第m个元素
 	 * @param n 数组中元素的个数
 	 * @return  最后一个元素在数组里的索引
 	 */
-	public int recursiveMethod(int n, int m) {
+	public static int findByRecursion(int n, int m) {
 		if (1 == n) {
 			return 0;
 		}
-		return (recursiveMethod(n-1, m) + m) % n;
+		return (findByRecursion(n - 1, m) + m) % n;
 	}
 }

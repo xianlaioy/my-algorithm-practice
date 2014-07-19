@@ -22,6 +22,7 @@ public class FindKthNode {
 
 	/**
      * 查找链表中倒数第k个节点
+     *
 	 * @param head  链表的头节点
 	 * @param k 倒数第k个节点
 	 * @return
@@ -40,6 +41,7 @@ public class FindKthNode {
 		}
 		// 链表的长度小于k
 		if (i != k - 1) {
+            logger.error("nodes < {}.", k);
 			return null;
 		}
 

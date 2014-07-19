@@ -19,6 +19,7 @@ public class MergeTwoSortedList {
 
 	/**
 	 * 合并两个有序单链表
+     *
 	 * @param firstHead     第一个单链表的头节点
 	 * @param secondHead    第二个单链表的头节点
 	 * @return  合并后的链表的头节点
@@ -44,22 +45,4 @@ public class MergeTwoSortedList {
 		return currentHead;
 	}
 
-	public static void main(String[] args) {
-		ListNode firstHead = new ListNode(1);
-		firstHead.next = new ListNode(3);
-		firstHead.next.next = new ListNode(5);
-		firstHead.next.next.next = new ListNode(14);
-
-		ListNode secondHead = new ListNode(2);
-		secondHead.next = new ListNode(6);
-		secondHead.next.next = new ListNode(10);
-		secondHead.next.next.next = new ListNode(20);
-
-		ListNode newHead = MergeTwoSortedList.merge(firstHead, secondHead);
-		while (newHead != null) {
-			System.out.print(newHead.value + "->");
-			newHead = newHead.next;
-		}
-
-	}
 }

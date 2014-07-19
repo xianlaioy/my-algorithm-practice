@@ -22,6 +22,7 @@ public class DeleteOneNode {
 
     /**
      * 从链表中删除某一个节点
+     *
      * @param head  链表的头节点
      * @param toDelete  要删除的节点
      * @return 头节点
@@ -29,12 +30,14 @@ public class DeleteOneNode {
 	public static ListNode delete(ListNode head, ListNode toDelete) {
 		// param error
 		if (head == null || toDelete == null) {
+            logger.info("param error.");
 			return head;
 		}
 		// 最后一个节点
 		if (toDelete.next == null) {
 			// 也是头节点
 			if (head == toDelete) {
+                logger.info("deleted the only one node.");
                 return null;
 			}
 			// 遍历查找前一个节点
