@@ -1,4 +1,4 @@
-package org.test.pointatoffer.LinkedList;
+package org.test.pointatoffer.linkedlist;
 
 import org.junit.Test;
 import org.test.BaseTest;

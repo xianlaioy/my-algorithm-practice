@@ -23,10 +23,9 @@ import java.util.LinkedList;
 public class StackWithMin {
 	private static Logger logger = LoggerFactory.getLogger(StackWithMin.class);
 
-	//  数据栈：存出数据；辅助栈：存储数据栈的当前最小值
+	//  数据栈：存放数据；辅助栈：存储数据栈的当前最小值；
 	private static LinkedList<Integer> dataStack = new LinkedList<Integer>();
 	private static LinkedList<Integer> minStack = new LinkedList<Integer>();
-	private static final int ERROR_FLAG = Integer.MIN_VALUE;  // error flag
 
 	/**
 	 *  入栈操作
@@ -34,27 +33,27 @@ public class StackWithMin {
 	 * @param element   入栈元素
 	 */
 	public static void push(int element) {
-		//   不能更新最小值，但最小值也需要入栈
+		// 不需更新最小值，但最小值也需要入栈
 		if (!minStack.isEmpty() && element > minStack.peek()) {
 			minStack.push(minStack.peek());
 		} else {
-			minStack.push(element);     //  更新最小值
+			minStack.push(element);     // 更新最小值
 		}
-		dataStack.push(element);       //  数据入栈
+		dataStack.push(element);       // 数据入栈
 	}
 
 	/**
-	 *  出栈操作
+	 * 出栈操作
 	 *
 	 * @return   数据栈的栈顶元素
 	 */
-	public static int pop() {
+	public static Integer pop() {
 		//  数据栈和辅助栈都需要执行出栈操作
 		if (!dataStack.isEmpty() && !minStack.isEmpty()) {
 			minStack.pop();
 			return dataStack.pop();
 		}
-		return ERROR_FLAG;
+		return null;
 	}
 
 	/**
@@ -62,12 +61,12 @@ public class StackWithMin {
 	 *
 	 * @return the min element
 	 */
-	public static Object min() {
+	public static Integer min() {
 		//  辅助栈的栈顶元素即是
 		if (!minStack.isEmpty()) {
 			return minStack.peek();
 		}
-		return ERROR_FLAG;
+		return null;
 	}
 
 }

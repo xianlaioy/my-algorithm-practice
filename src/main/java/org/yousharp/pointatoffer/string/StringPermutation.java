@@ -5,8 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * given a string, print all the permutations
- * for example: abc, acb, bca, bac, cba, cab
+ * 问题描述：
+ *  给定一个字符串，打印所有的排列；如输入abc，则打印abc, acb, bac, bca, cab, cba;
+ *
+ * 思路：
+ *
  * User: Daniel
  * Date: 13-12-29
  * Time: 上午8:10

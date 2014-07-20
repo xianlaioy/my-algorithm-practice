@@ -19,8 +19,8 @@ import java.util.LinkedList;
  * Date: 14-3-26
  * Time: 下午9:27
  */
-public class validateQueue {
-	private static Logger logger = LoggerFactory.getLogger(validateQueue.class);
+public class ValidateQueue {
+	private static Logger logger = LoggerFactory.getLogger(ValidateQueue.class);
 
 	/**
 	 *  第一个是入栈序列，判断第二个是否可以为一个出栈序列；
@@ -40,15 +40,9 @@ public class validateQueue {
 		//  遍历出栈序列
 		for (outputIndex = 0; outputIndex < output.length; outputIndex++) {
 			//  首先和中间栈的栈顶相比，如果相等，则弹出栈顶元素，同时，出栈序列后移
-			if (!stack.isEmpty()) {
-				if (stack.peek() == output[outputIndex]) {
-					stack.pop();
-					continue;
-				} else {    //  如果与栈顶不等，且输入序列为空，表示为非合法序列
-					if (inputIndex == input.length) {
-						return false;
-					}
-				}
+			if (!stack.isEmpty() && stack.peek() == output[outputIndex]) {
+                stack.pop();
+                continue;
 			}
 
 			//  然后与入栈序列相比，如果不等，则入栈，直到相等，表示当前元素合法（入栈立即出栈即可）
@@ -56,6 +50,9 @@ public class validateQueue {
 				stack.push(input[inputIndex]);
 				inputIndex++;
 			}
+            if (inputIndex == input.length) {
+                return false;
+            }
             //  别忘了将入栈序列的索引后移
 			inputIndex ++;
 		}

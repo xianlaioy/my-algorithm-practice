@@ -1,4 +1,4 @@
-package org.test.pointatoffer.LinkedList;
+package org.test.pointatoffer.linkedlist;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
