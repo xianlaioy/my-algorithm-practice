@@ -60,7 +60,7 @@ public class FindNumbersWithSum {
         while (start < end) {
             int currentSum = data[start] + data[end];
             if (currentSum == sum) {
-                logger.info("find pair: {} and {}", data[start], data[end]);
+                logger.info("findParentByPath pair: {} and {}", data[start], data[end]);
                 start++;
                 end--;
             } else if (currentSum < sum) {

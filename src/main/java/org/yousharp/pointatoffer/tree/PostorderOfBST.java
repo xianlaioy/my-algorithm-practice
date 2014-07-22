@@ -34,12 +34,12 @@ public class PostorderOfBST {
 		}
 		int root = data[end];   // the last node is the root of the BST
 		int i = start;
-		// find the left part of the BST
+		// findParentByPath the left part of the BST
 		while (i < end && data[i] < root) {
 			i++;
 		}
 		int j = i;
-		// find the right part of the BST
+		// findParentByPath the right part of the BST
 		while (j < end && data[j] > root) {
 			j++;
 		}
