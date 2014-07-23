@@ -11,10 +11,10 @@ import java.util.LinkedList;
  *  求二叉树的镜像
  *
  * 思路：
- *  二叉树的镜像，就是将二叉树的每一个节点的左右子节点交换；具体实现上：
- *  算法一：通过递归，先序遍历，当节点不为空时，将左右子节点互换；
- *  算法二：递归的本质也是栈，遍历的方式对结果不影响，所以可以通过层次遍历，将
- *  节点保存在栈中，然后将栈中的每一个节点的左右子节点互换；
+ *  二叉树的镜像，就是将整个二叉树翻转过来，即将每个节点的左右节点都互换。所以只需要以某种方式遍历二叉树，交换
+ *  每个节点的左右节点即可，比如前序遍历、中序遍历、后序遍历及层次遍历都行：
+ *  思路一：通过递归，先序遍历，当节点不为空时，将左右子节点互换；
+ *  思路二：通过队列，层次遍历。
  *
  * User: Daniel
  * Date: 13-12-22
@@ -25,11 +25,11 @@ public class MirrorOfBinaryTree {
 	private static Logger logger = LoggerFactory.getLogger(MirrorOfBinaryTree.class);
 
 	/**
-	 * 通过递归的思路，先序遍历每一个节点，互换节点的左右子节点；
+	 * 通过递归，先序遍历每一个节点，互换节点的左右子节点；
 	 *
 	 * @param root
 	 */
-	private static void mirrorByRecursion(TreeNode root) {
+	public static void mirrorByPreOrder(TreeNode root) {
 		if (null == root) {
 			return;
 		}
@@ -40,31 +40,30 @@ public class MirrorOfBinaryTree {
 		root.right = leftBak;
 
 		// 递归遍历左右子树
-		mirrorByRecursion(root.left);
-		mirrorByRecursion(root.right);
+		mirrorByPreOrder(root.left);
+		mirrorByPreOrder(root.right);
 	}
 
 	/**
-	 * 借助栈，使用层次遍历的思路，遍历每一个节点，并交换其左右子节点；
+	 * 借助队列，层次遍历，并交换左右子节点；
 	 *
 	 * @param root
 	 */
-	public static void mirrorByStack(TreeNode root) {
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-		stack.push(root);   // push the root to the stack
-		while (!stack.isEmpty()) {
-			TreeNode currNode = stack.pop();    // get the top node
+	public static void mirrorByLayer(TreeNode root) {
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.offer(root);
+		while (!queue.isEmpty()) {
+			TreeNode currNode = queue.poll();
 			if (currNode != null) {
-				// push left and right children
-				stack.push(currNode.left);
-				stack.push(currNode.right);
+                // 先将左右节点入队
+				queue.offer(currNode.left);
+				queue.offer(currNode.right);
 
-				// swap left and right children
+                // 交换左右子节点
 				TreeNode leftBak = currNode.left;
 				currNode.left = currNode.right;
 				currNode.right = leftBak;
 			}
 		}
 	}
-
 }
