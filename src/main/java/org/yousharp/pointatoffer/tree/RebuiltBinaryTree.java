@@ -23,7 +23,7 @@ public class RebuiltBinaryTree {
 	private static boolean status = true;
 
 	/**
-	 *根据前序和中序遍历序列，重建二叉树
+	 * 根据前序和中序遍历序列，重建二叉树
      *
 	 * @param preOrder   前序遍历序列
 	 * @param preStart   前序遍历序列起始元素的下标
@@ -78,7 +78,7 @@ public class RebuiltBinaryTree {
 	 * @param key   the key to search for
 	 * @return
 	 */
-	public static int indexOf(int[] data, int key) {
+	private static int indexOf(int[] data, int key) {
 		for (int i = 0; i < data.length; i++) {
 			if (data[i] == key) {
 				return i;
@@ -92,13 +92,24 @@ public class RebuiltBinaryTree {
      *
 	 * @param root
 	 */
-	private static void postOrderTraverse(TreeNode root) {
+	public static void postOrderTraverse(TreeNode root) {
 		if (null == root) {
 			return;
 		}
 		postOrderTraverse(root.left);
 		postOrderTraverse(root.right);
-		logger.info("{} ", root.value);
+		printNode(root);
 	}
+
+    /**
+     * 打印节点的值
+     *
+     * @param node
+     */
+    private static void printNode(TreeNode node) {
+        if (node != null) {
+            logger.info("{}", node.value);
+        }
+    }
 
 }
