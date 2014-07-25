@@ -1,0 +1,36 @@
+package org.yousharp.algorithm.sort;
+
+import org.yousharp.algorithm.Tool;
+
+/**
+ * 插入排序
+ * 思路：假设当前序列有序，插入一个新元素时，将该元素作为序列的最后一个元素，此时序列无序，需要调整，
+ * 从后向前遍历序列，如果相邻的两个元素不是有序的，则互换使其有序，一趟遍历，新序列也是有序的。初始
+ * 状态，有序序列为空。
+ * 复杂度：时间O(n^2), 空间：O(1)；
+ *
+ * 参考：
+ *  http://algs4.cs.princeton.edu/21elementary/Insertion.java.html
+ *  http://algs4.cs.princeton.edu/21elementary/
+ *
+ * User: lingguo
+ * Date: 14-7-25 上午7:34
+ */
+public class InsertionSort {
+
+    /**
+     * 遍历数组，调整顺序
+     *
+     * @param data
+     */
+    public static void sort(int[] data) {
+        int len = data.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j > 0 && data[j]  < data[j-1]; j--) {
+                Tool.exch(data, j, j - 1);
+//                exch2(data[j], data[j-1]);
+            }
+        }
+        Tool.show(data);
+    }
+}
