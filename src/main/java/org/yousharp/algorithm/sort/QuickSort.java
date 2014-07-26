@@ -6,6 +6,7 @@ import org.yousharp.algorithm.Tool;
  * 快速排序：
  *  思路：先将序列根据哨兵分成两部分，左部分的元素都小于哨兵，右部分的元素都大于哨兵；
  *  然后，分别对左半部分和后半部分递归排序即可。
+ *  复杂度：时间O(n^2)
  *
  * 参考：
  *  http://algs4.cs.princeton.edu/23quicksort/Quick.java.html
