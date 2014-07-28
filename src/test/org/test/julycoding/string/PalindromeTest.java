@@ -15,7 +15,7 @@ public class PalindromeTest extends BaseTest {
         char[] str1 = "IamaI".toCharArray();
         char[] str2 = "Iamai".toCharArray();
 
-        logger.info("str1, check1: {}, check2: {}", Palindrome.check(str1), Palindrome.check2(str1));
-        logger.info("str2, check1: {}, check2: {}", Palindrome.check(str2), Palindrome.check2(str2));
+        logger.info("str1, check1: {}, check2: {}", Palindrome.checkStr(str1), Palindrome.checkStr2(str1));
+        logger.info("str2, check1: {}, check2: {}", Palindrome.checkStr(str2), Palindrome.checkStr2(str2));
     }
 }

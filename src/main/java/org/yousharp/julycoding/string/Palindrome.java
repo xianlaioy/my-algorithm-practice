@@ -1,5 +1,8 @@
 package org.yousharp.julycoding.string;
 
+import org.yousharp.common.ListNode;
+import org.yousharp.common.Stack;
+
 /**
  * 问题描述：
  *  判断一个字符串是否为回文串，即字符串顺着读和反着读是一样的，如：madam是一个回文串。
@@ -8,18 +11,21 @@ package org.yousharp.julycoding.string;
  *  思路一：使用两个指针，从两端向中间遍历，直到相遇，判断是否相等；时间复杂度O(n)，空间复杂度O(1)；
  *  思路二：使用两个指针，从中间向两端遍历，直到遇到字符边界，判断是否相等；时间复杂度O(n)，空间复杂度O(1)；
  *
+ * 链接：https://github.com/nkcoder/The-Art-Of-Programming-By-July/blob/master/ebook/zh/01.04.md
+ *
  * User: lingguo
  * Date: 14-7-27 下午11:38
  */
 public class Palindrome {
 
     /**
+     * 判断字符串是否为回文；
      * 思路一：使用两个指针，从两端向中间遍历；
      *
      * @param str
      * @return
      */
-    public static boolean check(char[] str) {
+    public static boolean checkStr(char[] str) {
         if (str == null || str.length == 0) {
             return false;
         }
@@ -36,14 +42,16 @@ public class Palindrome {
         return true;
     }
 
+/**********************************************************************************************************/
 
     /**
+     * 判断字符串是否为回文：
      * 思路二：使用两个指针，从中间向两端遍历；
      *
      * @param str
      * @return
      */
-    public static boolean check2(char[] str) {
+    public static boolean checkStr2(char[] str) {
         if (str == null || str.length == 0) {
             return false;
         }
@@ -61,5 +69,27 @@ public class Palindrome {
             midRight++;
         }
         return true;
+    }
+
+/****************************************************************************************/
+
+    /**
+     * 判断一个链表是否为回文
+     * 思路：链表的前半部分保持不变，将后半部分反转，然后从两个头节点依次比较；
+     *
+     * @param head
+     */
+    public static void checkLinkedList(ListNode head) {
+
+    }
+
+
+    /**
+     * 判断一个栈是否为回文：
+     * 思路：
+     * @param stack
+     */
+    public static void checkStack(Stack stack) {
+
     }
 }
