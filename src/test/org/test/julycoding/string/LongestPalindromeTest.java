@@ -18,4 +18,15 @@ public class LongestPalindromeTest extends BaseTest {
         logger.info("pal: {}", pal);
     }
 
+
+    @Test
+    public void testManacher() {
+        char[] str1 = "ecbabcd".toCharArray();
+        char[] str2 = "cbaabc".toCharArray();
+
+        char[] ret1 = LongestPalindrome.manacher(str1);
+        char[] ret2 = LongestPalindrome.manacher(str2);
+        logger.info("ret1: {}, ret2: {}", ret1, ret2);
+    }
+
 }
