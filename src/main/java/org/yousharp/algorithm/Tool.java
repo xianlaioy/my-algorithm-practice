@@ -1,13 +1,15 @@
 package org.yousharp.algorithm;
 
 /**
+ * 一些工具方法集合
+ *
  * User: lingguo
  * Date: 14-7-25 下午11:01
  */
 public class Tool {
 
     /**
-     * 交换数组中两个元素的值
+     * 交换整数数组中两个元素的值
      *
      * @param data
      * @param i
@@ -19,9 +21,22 @@ public class Tool {
         data[j] = swap;
     }
 
+    /**
+     * 交换字符数组中两个元素的值
+     *
+     * @param data
+     * @param i
+     * @param j
+     */
+    public static void exch(char[] data, int i, int j) {
+        char swap = data[i];
+        data[i] = data[j];
+        data[j] = swap;
+    }
+
 
     /**
-     * 打印数组
+     * 打印整数数组
      *
      * @param data
      */
@@ -30,6 +45,38 @@ public class Tool {
             System.out.print(element + " ");
         }
     }
+
+    /**
+     * 打印字符数组
+     *
+     * @param data
+     */
+    public static void show(char[] data) {
+        for (char element: data) {
+            System.out.println(element + " ");
+        }
+    }
+
+    /**
+     * 反转字符串
+     *
+     * @param data
+     */
+    public static void reverse(char[] data, int begin, int end) {
+        int first = begin;
+        int last = end;
+        while (first < last) {
+            exch(data, first, last);
+            first++;
+            last--;
+        }
+    }
+
+
+
+
+
+
 
 
     /**
