@@ -24,11 +24,11 @@ public class InsertionSort {
      * @param data
      */
     public static void sort(int[] data) {
-        int len = data.length;
-        for (int i = 0; i < len; i++) {
+        int end = data.length - 1;
+        for (int i = 1; i <= end; i++) {
             for (int j = i; j > 0 && data[j]  < data[j-1]; j--) {
                 Tool.exch(data, j, j - 1);
-//                exch2(data[j], data[j-1]);
+//                exch2(data[j], data[j-1]);            // error
             }
         }
         Tool.show(data);

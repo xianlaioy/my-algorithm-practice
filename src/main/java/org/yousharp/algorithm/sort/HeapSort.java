@@ -29,13 +29,18 @@ public class HeapSort {
 
     public static void sort(int[] data) {
         int end = data.length - 1;
-        // 最后一个非叶子节点
+        /**
+         * 先计算最后一个非叶子节点的位置，然后从最后一个非叶子节点开始，对所有的
+         * 非叶子节点进行调整，调整后每一个节点的值都大于其左右孩子节点，堆顶为最大值。
+         */
         int node = (end - 1) >> 1;
-        // 第一次调整为最大堆，此时堆顶为最大值
         while (node >= 0) {
             sink(data, node--, end);
         }
-        // 将堆顶换到当前堆的最后，调整堆
+        /**
+         * 每次将堆顶换到当前堆的最后，将堆调整为最大堆，因此此时出堆顶元素发生变化外，
+         * 其它节点都维持了大顶规则，所以只需要对堆顶元素进行一次调整即可。
+         */
         while (end > 0) {
             Tool.exch(data, 0, end--);
             sink(data, 0, end);
@@ -56,7 +61,7 @@ public class HeapSort {
         while (k * 2 + 1 <= end) {
             // 在左右节点中选择较大值
             int j = 2 * k + 1;
-            if (j+1 <= end) {
+            if (j + 1 <= end) {
                 if (data[j] < data[j+1]) {
                     j++;
                 }

@@ -23,10 +23,10 @@ public class SelectionSort {
      * @param data
      */
     public static void sort(int[] data) {
-        int len = data.length;
-        for (int i = 0; i < len; i++) {
+        int end = data.length - 1 ;
+        for (int i = 0; i <= end; i++) {
             int min = i;
-            for (int j = i; j < len; j++) {
+            for (int j = i; j <= end; j++) {
                 if (data[j] < data[min]) {
                     min = j;
                 }

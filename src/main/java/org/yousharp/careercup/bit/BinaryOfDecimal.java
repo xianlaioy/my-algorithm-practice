@@ -24,7 +24,14 @@ import org.slf4j.LoggerFactory;
 public class BinaryOfDecimal {
     private static Logger logger = LoggerFactory.getLogger(BinaryOfDecimal.class);
 
+    /**
+     * 将浮点数表示为二进制形式
+     *
+     * @param decimalValue
+     * @return
+     */
     public static String represent(String decimalValue) {
+        // 因为.在正则表达式里表示匹配任意单个字符，所以需要先转义
         String[] valueArray = decimalValue.split("\\.");
         int intPart = Integer.valueOf(valueArray[0]);
         double decPart = Double.valueOf(decimalValue) - intPart;
