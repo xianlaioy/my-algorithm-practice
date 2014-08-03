@@ -1,7 +1,7 @@
 package org.yousharp.common;
 
 /**
- * 链表的定义
+ * 栈的定义
  *
  * User: Daniel
  * Date: 13-12-14

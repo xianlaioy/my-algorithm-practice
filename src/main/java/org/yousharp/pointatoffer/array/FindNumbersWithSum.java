@@ -23,7 +23,7 @@ public class FindNumbersWithSum {
      * 给定值sum，求所有和为sum的连续整数序列
      * @param sum
      */
-	public void findContinuousSum(int sum) {
+	public void find(int sum) {
 		int start = 1;
 		int end = 2;
         int boundary = (sum + 1) >> 1;  // 序列右边界

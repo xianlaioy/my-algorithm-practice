@@ -5,8 +5,8 @@ package org.yousharp.pointatoffer.array;
  *  求Fibonacci序列之和：f(n) = f(n-1) + f(n-2); 【n>0, f(1)=f(2)=1】
  *
  * 思路：
- *  1. 根据公式递归求解，会有大量重复计算，效率低；复杂度（n的指数级）
- *  2. 保存中间结果，迭代累加：
+ *  思路一. 根据公式递归求解，会有大量重复计算，效率低；复杂度（n的指数级）
+ *  思路二. 保存中间结果，迭代累加：
  *      f(3) = f(1) + f(2); f(1)和f(2)是已知的；
  *      f(4) = f(2) + f(3); f(2)和f(3)是已知的，可以将f(2)看作原来的f(1)，将f(3)看作原来的f(2)；
  *      ...
@@ -24,7 +24,7 @@ public class Fibonacci {
 	 * @param n
 	 * @return
 	 */
-	private long iterativeMethod(int n) {
+	private long calculate(int n) {
 		if (n < 0) {
 			return 0;
 		}
