@@ -34,7 +34,7 @@ public class SumByBit {
 			bitXor = firstNum ^ secondNum;  // 异或，提取出不同位
 			bitAnd = firstNum & secondNum;  // 与，提取进位
 			firstNum = bitXor;
-			secondNum = bitAnd << 1;
+			secondNum = bitAnd << 1;        // 进位需要左移
 		}
 		return firstNum;
 	}

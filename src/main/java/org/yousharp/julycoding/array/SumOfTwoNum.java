@@ -17,7 +17,7 @@ package org.yousharp.julycoding.array;
  *  这两个数即为所求。
  *
  * 参考：https://github.com/nkcoder/The-Art-Of-Programming-By-July/blob/master/ebook/zh/02.02.md
- * 
+ *
  * User: lingguo
  * Date: 14-8-4 下午10:11
  */

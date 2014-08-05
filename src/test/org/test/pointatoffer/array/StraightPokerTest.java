@@ -12,7 +12,7 @@ public class StraightPokerTest extends BaseTest {
 
     @Test
     public void testIsValid() {
-        int[] cards = new int[] {12, 11, 8, 0, 7, 9};
+        int[] cards = new int[] {12, 11, 8, 0, 8, 9};
         boolean resultOfBit =  StraightPoker.isValidByBit(cards, cards.length);
         boolean resultOfArray =  StraightPoker.isValidByArray(cards, cards.length);
         logger.info("bit result: {}, array result: {}", resultOfBit, resultOfArray);

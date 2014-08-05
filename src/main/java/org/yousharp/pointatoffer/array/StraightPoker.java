@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  *  有14个数字O(nlogn)与O(n^2)是一个数量级的)；
  *
  *  思路二：0表示的大小王可以忽略；求非0数字的最大值与最小值，如果它们之间的差值小于5，则表示可以构成顺子；
- *  这里需要处理一个异常输入，即有重复的牌；如何去重：基于位运算构造签名；用数组模拟map；
+ *  这里需要处理一个异常输入，即有重复的牌；如何去重：基于位运算构造签名；或者用数组模拟map；
  *
  * User: Daniel
  * Date: 14-1-19
@@ -69,7 +69,7 @@ public class StraightPoker {
         int mask = 0;
         for (int i = 0; i < length; i++) {
             if (cards[i] != 0) {
-                if ((mask &= (1 << cards[i])) != 0) {
+                if ((mask & (1 << cards[i])) != 0) {
                     return false;
                 }
                 mask |= (1 << cards[i]);
