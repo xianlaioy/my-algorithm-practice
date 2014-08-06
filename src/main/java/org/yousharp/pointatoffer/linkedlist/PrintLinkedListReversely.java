@@ -33,7 +33,7 @@ public class PrintLinkedListReversely {
 			return;
 		}
         // LinkedList作为栈
-		LinkedList<ListNode> stack = new LinkedList<ListNode>();
+		LinkedList<ListNode> stack = new LinkedList<>();
         // 入栈
 		while (head != null) {
 			stack.push(head);

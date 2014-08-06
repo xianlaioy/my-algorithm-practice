@@ -23,7 +23,7 @@ public class ReverseLinkList {
 	 * @return  翻转后的链表的头节点
 	 */
 	public static ListNode reverse(ListNode head) {
-		// we need to record three pointers: the current one, the previous and the next
+		// 初始状态
 		ListNode previous = null;
         ListNode current = head;
 		while (current != null) {

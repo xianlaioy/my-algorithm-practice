@@ -32,7 +32,7 @@ import java.util.ArrayList;
  *  将该公式以及(k=m-1)与f(n,m)=g(n-1,m)组合，有：
  *  f(n,m) = [f(n-1)+m]%n
  *  即如果要求f(n,m)，可以先求f(n-1)，得到的递归公式为：
- *      f(n,m) = [f(n-1,m)+m]%n, (其中，f(1,m)=0)
+ *      f(n,m) = [f(n-1)+m]%n, (其中，f(1,m)=0)
  *  利用该公式，使用递归或者循环很容易解决。复杂度O(n)
  *
  * User: Daniel
@@ -56,7 +56,7 @@ public class LastNumberInCircle {
 
 		// 寻找链表最后一个节点
 		ListNode loopNode = head;
-		while (null != loopNode.next) {
+		while (loopNode.next != null) {
 			loopNode = loopNode.next;
 		}
         // 如果每次都是删除第一个节点，则返回的应该是最后一个节点
@@ -82,7 +82,7 @@ public class LastNumberInCircle {
 	}
 
 	/**
-	 * 使用标准库的LinkedList模拟环形链表，遍历到最后一个元素后，返回到第一个元素，继续
+	 * 使用标准库的LinkedList，直接计算下一个要删除的元素的索引即可，直到链表中仅有一个元素；
      *
 	 * @param numberList    包含n个数的链表
 	 * @param m 要删除的第m个数
