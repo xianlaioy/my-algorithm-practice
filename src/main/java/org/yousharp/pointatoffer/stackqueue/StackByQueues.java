@@ -8,7 +8,7 @@ import java.util.LinkedList;
  *  使用两个队列实现栈的入栈和出栈操作；
  *
  * 思路：
- *  始终维持一个队列为空，一个队列非空；入栈的时候向非空的队列插入一个元素；出栈的时候，将非空
+ *  始终维持一个队列为空，一个队列非空；入队的时候向非空的队列插入一个元素；出队的时候，将非空
  *  队列中的所有元素（除队尾元素外，此元素为栈顶元素）都依次出队并插入到空队列中，此时非空队列中的
  *  为一个的队尾元素即为要出栈的元素。
  *
@@ -17,11 +17,11 @@ import java.util.LinkedList;
  * Time: 上午11:19
  */
 public class StackByQueues {
-	private static LinkedList<Integer> firstQueue = new LinkedList<Integer>();
-	private static LinkedList<Integer> secondQueue = new LinkedList<Integer>();
+	private static LinkedList<Integer> firstQueue = new LinkedList<>();
+	private static LinkedList<Integer> secondQueue = new LinkedList<>();
 
 	/**
-	 *  入栈：向非空队列插入一个元素
+	 *  模拟入栈操作：向非空队列插入一个元素
 	 *
 	 * @param element
 	 */

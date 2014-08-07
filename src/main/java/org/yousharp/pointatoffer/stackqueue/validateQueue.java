@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /**
  * 问题描述：
- *  两个整数序列，第一个表示栈的压入顺序（压入栈的元素可以出栈），请判断第二个序列是否可以时栈的一个弹出序列。
+ *  两个整数序列，第一个表示栈的压入顺序（压入栈的元素可以出栈），请判断第二个序列是否可以是栈的一个弹出序列。
  * (假设压入序列的数字均不相同）
  *
  * 思路：
@@ -32,7 +32,7 @@ public class ValidateQueue {
 	 */
 	public static boolean check(int[] input, int[] output) {
 		//  辅助栈
-		LinkedList<Integer> stack = new LinkedList<Integer>();
+		LinkedList<Integer> stack = new LinkedList<>();
 
 		//  出栈序列和入栈序列的元素索引
 		int inputIndex = 0;

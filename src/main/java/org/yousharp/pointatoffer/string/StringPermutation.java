@@ -9,13 +9,15 @@ import org.slf4j.LoggerFactory;
  *  给定一个包含n个字符的字符串，打印所有的排列；如输入abc，则打印abc, acb, bac, bca, cab, cba;
  *
  * 思路：
- *  思路一：将全排列分为两部分，第1个字符和剩下的(n-1)个字符；将(n-1)个字符全排列，然后将第一个字符
+ *  【思路一】：将全排列分为两部分，第1个字符和剩下的(n-1)个字符；将(n-1)个字符全排列，然后将第一个字符
  *  逐一与剩下的每个字符互换位置，每次将新的(n-1)个字符全排列；当第1个字符与(n-1)个字符都互换且全排列完毕
  *  后，全排列完毕；复杂度O(n^2)；
  *
- *  思路二：也是递归的策略，画图比较好理解，参考：
+ *  【思路二】：也是递归的策略，画图比较好理解，参考：
  *      http://introcs.cs.princeton.edu/java/23recursion/Permutations.java.html
  *
+ *  【思路三】：无论是整数还是数字，都可以比较大小，因此判断当前排列的下一个排列，
+ *      参考：{@link org.yousharp.julycoding.string.Permutation}
  * User: Daniel
  * Date: 13-12-29
  * Time: 上午8:10
