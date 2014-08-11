@@ -3,13 +3,13 @@ package org.test.pointatoffer.tree;
 import org.junit.Test;
 import org.test.BaseTest;
 import org.yousharp.common.TreeNode;
-import org.yousharp.pointatoffer.tree.CheckSubTree;
+import org.yousharp.pointatoffer.tree.IsSubTree;
 
 /**
  * User: lingguo
  * Date: 14-7-22 下午9:14
  */
-public class CheckSubTreeTest extends BaseTest {
+public class IsSubTreeTest extends BaseTest {
 
     @Test
     public void testCheck() {
@@ -31,7 +31,7 @@ public class CheckSubTreeTest extends BaseTest {
         smallTree.left = new TreeNode(3);
         smallTree.right = new TreeNode(4);
 
-        logger.info("subTree: {}", CheckSubTree.check(bigTree, smallTree));
+        logger.info("subTree: {}", IsSubTree.check(bigTree, smallTree));
 
     }
 }
