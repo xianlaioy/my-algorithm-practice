@@ -50,7 +50,7 @@ public class MirrorOfBinaryTree {
 	 * @param root
 	 */
 	public static void mirrorByLayer(TreeNode root) {
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		LinkedList<TreeNode> queue = new LinkedList<>();
 		queue.offer(root);
 		while (!queue.isEmpty()) {
 			TreeNode currNode = queue.poll();

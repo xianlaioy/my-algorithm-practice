@@ -11,6 +11,7 @@ import java.util.LinkedList;
  *  层次遍历二叉树；
  *
  * 思路：
+ *  线序遍历+队列存储；
  *  先序遍历二叉树，将节点依次放入队列，先进先出，达到层次遍历的目的。
  *
  * User: Daniel
@@ -31,15 +32,15 @@ public class TraverseByTier {
 		}
 
 		// 使用队列保存要遍历的节点
-		LinkedList<TreeNode> nodeQueue = new LinkedList<TreeNode>();
+		LinkedList<TreeNode> nodeQueue = new LinkedList<>();
 		nodeQueue.offer(head);
 		while (!nodeQueue.isEmpty()) {
 			TreeNode node = nodeQueue.poll();
 			printNode(node);
-			if (null != node.left) {
+			if (node.left != null) {
 				nodeQueue.addLast(node.left);
 			}
-			if (null != node.right) {
+			if (node.right != null) {
 				nodeQueue.addLast(node.right);
 			}
 		}

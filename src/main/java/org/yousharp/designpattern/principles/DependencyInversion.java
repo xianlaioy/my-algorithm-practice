@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author: lingguo
  * @time: 2014/8/11 20:58
  */
-public class DependencyInversionPrinciple {
+public class DependencyInversion {
 
     @Test
     public void demo() {

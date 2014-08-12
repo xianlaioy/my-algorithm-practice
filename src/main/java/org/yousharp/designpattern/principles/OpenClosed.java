@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author: lingguo
  * @time: 2014/8/11 20:17
  */
-public class OpenClosedPrinciple {
+public class OpenClosed {
 
     @Test
     public void demo() {
