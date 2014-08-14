@@ -1,4 +1,4 @@
-package org.yousharp.designpattern.singleton;
+package org.yousharp.designpattern.creational.singleton;
 
 import java.io.Serializable;
 
@@ -12,12 +12,12 @@ import java.io.Serializable;
  * Date: 13-12-5
  * Time: 下午10:23
  */
-public class PerfectSingleton implements Serializable {
+public class SerializeSingleton implements Serializable {
 	// serial version id
 	private static final long serialVersionUID = 1L;
 
 	// private constructor
-	private PerfectSingleton() {}
+	private SerializeSingleton() {}
 
 	// readResolve
 	protected Object readResolve() {
@@ -26,10 +26,10 @@ public class PerfectSingleton implements Serializable {
 
 	// inner class
 	private static class PerfectHolder {
-		private static final PerfectSingleton instance = new PerfectSingleton();
+		private static final SerializeSingleton instance = new SerializeSingleton();
 	}
 
-	public static PerfectSingleton getInstance() {
+	public static SerializeSingleton getInstance() {
 		return PerfectHolder.instance;
 	}
 

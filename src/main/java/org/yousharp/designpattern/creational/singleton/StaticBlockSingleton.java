@@ -1,4 +1,4 @@
-package org.yousharp.designpattern.singleton;
+package org.yousharp.designpattern.creational.singleton;
 
 /**
  * 静态块是在类加载的时候执行，甚至比构造函数的调用还要早；
@@ -13,8 +13,7 @@ public class StaticBlockSingleton {
 	private static final StaticBlockSingleton instance;
 
 	// private constructor
-	private StaticBlockSingleton() {
-	}
+	private StaticBlockSingleton() {}
 
 	// static block
 	static {

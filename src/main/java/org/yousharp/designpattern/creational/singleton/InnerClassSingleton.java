@@ -1,7 +1,7 @@
-package org.yousharp.designpattern.singleton;
+package org.yousharp.designpattern.creational.singleton;
 
 /**
- * 通过内部类实现单例模式，只有需要时才会创建实例；
+ * 将实例作为类的静态变量，仅在类加载时创建一次；
  * 如果需要使用单例模式，强烈推荐这种实现方式。
  *
  * User: Daniel
