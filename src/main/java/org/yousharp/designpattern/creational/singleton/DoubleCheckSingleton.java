@@ -1,8 +1,9 @@
 package org.yousharp.designpattern.creational.singleton;
 
 /**
+ * 懒汉式单例：仅在需要实例时才创建，但是为了适应多线程，需要增加同步代码。
+ *
  * 双重判定：是对用synchronized同步方法的改进，尽在需要创建实例时才加锁。
- * 优点：这个一个正确的单例模式。
  * 注意：volatile关键字，在多线程时，保证线程的读写顺序，即一个线程的写操作完成后，另一个线程才能读。
  *
  * User: Daniel
