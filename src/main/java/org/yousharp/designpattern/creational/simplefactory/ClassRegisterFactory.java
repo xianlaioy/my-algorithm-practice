@@ -11,6 +11,9 @@ import java.util.concurrent.ConcurrentMap;
  *  然后在创建实例时，通过类的反射创建新的对象；
  *  - 在具体product中，先将创建条件和类注册到factory的HashMap上；
  *
+ * 参考：
+ *  - http://www.oodesign.com/factory-pattern.html
+ *
  * @author: lingguo
  * @time: 2014/8/14 7:48
  */
