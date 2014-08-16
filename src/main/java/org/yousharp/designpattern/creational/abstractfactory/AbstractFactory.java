@@ -137,6 +137,5 @@ class AbstractFactoryClient {
         computer.printBrand();
         mobileSystem.printInfo();
 
-
     }
 }
