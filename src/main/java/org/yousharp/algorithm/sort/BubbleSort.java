@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 冒泡排序：(升序)
@@ -34,12 +34,12 @@ public class BubbleSort {
             // 两两比较，最小值“沉”到最后
             for (int j = 1; j <= i; j++) {
                 if (data[j-1] > data[j]) {
-                    Tool.exch(data, j-1, j);
+                    Util.exch(data, j - 1, j);
                     swapped = true;
                 }
             }
         }
-        Tool.show(data);
+        Util.show(data);
     }
 
     /**
@@ -53,12 +53,12 @@ public class BubbleSort {
             int lastSwap = 0;
             for (int i = 1; i <= n; i++) {
                 if (data[i-1] > data[i]) {
-                    Tool.exch(data, i-1, i);
+                    Util.exch(data, i - 1, i);
                     lastSwap = i;              // 记录最后发生交换的位置
                 }
             }
             n = lastSwap;
         }
-        Tool.show(data);
+        Util.show(data);
     }
 }

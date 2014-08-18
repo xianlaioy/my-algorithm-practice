@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 插入排序
@@ -27,10 +27,10 @@ public class InsertionSort {
         int end = data.length - 1;
         for (int i = 1; i <= end; i++) {
             for (int j = i; j > 0 && data[j]  < data[j-1]; j--) {
-                Tool.exch(data, j, j - 1);
+                Util.exch(data, j, j - 1);
 //                exch2(data[j], data[j-1]);            // error
             }
         }
-        Tool.show(data);
+        Util.show(data);
     }
 }

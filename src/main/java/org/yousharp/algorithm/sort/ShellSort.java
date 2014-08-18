@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 希尔排序：
@@ -31,7 +31,7 @@ public class ShellSort {
             for (int i = gap; i < len; i++) {
                 for (int j = i; j >= gap; j -= gap) {
                     if (data[j] < data[j-gap]) {
-                        Tool.exch(data, j, j-gap);
+                        Util.exch(data, j, j - gap);
                     }
                 }
             }
@@ -39,6 +39,6 @@ public class ShellSort {
             gap /= 3;
         }
 
-        Tool.show(data);
+        Util.show(data);
     }
 }

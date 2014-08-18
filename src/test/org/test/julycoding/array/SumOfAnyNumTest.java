@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * @author: lingguo
  * @time: 2014/8/16 12:03
  */
-public class TestSumOfAnyNum extends BaseTest {
+public class SumOfAnyNumTest extends BaseTest {
 
     @Test
     public void testCalculate() {

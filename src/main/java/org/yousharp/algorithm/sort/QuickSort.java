@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 快速排序：
@@ -58,10 +58,10 @@ public class QuickSort {
             if (i >= j) {
                 break;
             }
-            Tool.exch(data, i, j);
+            Util.exch(data, i, j);
         }
         // 将哨兵放到合适的位置
-        Tool.exch(data, lo, j);
+        Util.exch(data, lo, j);
         return j;
     }
 

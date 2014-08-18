@@ -6,7 +6,7 @@ package org.yousharp.algorithm;
  * User: lingguo
  * Date: 14-7-25 下午11:01
  */
-public class Tool {
+public class Util {
 
     /**
      * 交换整数数组中两个元素的值
@@ -44,6 +44,7 @@ public class Tool {
         for (int element: data) {
             System.out.print(element + " ");
         }
+        System.out.println();
     }
 
     /**
@@ -55,6 +56,7 @@ public class Tool {
         for (char element: data) {
             System.out.println(element + " ");
         }
+        System.out.println();
     }
 
     /**
@@ -70,6 +72,19 @@ public class Tool {
             first++;
             last--;
         }
+    }
+
+    /**
+     * 判断value是否为奇数
+     *
+     * @param value
+     * @return
+     */
+    public static boolean isOdd(int value) {
+        if ((value & 0x01) == 0) {
+            return false;
+        }
+        return true;
     }
 
 

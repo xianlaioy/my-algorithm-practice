@@ -1,6 +1,6 @@
 package org.yousharp.julycoding.string;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  *  * 问题描述：
@@ -46,9 +46,9 @@ public class Permutation {
         }
         // 将首字符与其它每一个字符互换，递归求全排列
         for (int i = begin; i <= end; i++) {
-            Tool.exch(str, i, begin);
+            Util.exch(str, i, begin);
             swapAndRecur(str, begin + 1, end);
-            Tool.exch(str, i, begin);
+            Util.exch(str, i, begin);
         }
     }
 
@@ -84,8 +84,8 @@ public class Permutation {
         /**
          * 互换并翻转
          */
-        Tool.exch(str, i, j);
-        Tool.reverse(str, i + 1, str.length - 1);
+        Util.exch(str, i, j);
+        Util.reverse(str, i + 1, str.length - 1);
         System.out.println(str);
 
         return true;

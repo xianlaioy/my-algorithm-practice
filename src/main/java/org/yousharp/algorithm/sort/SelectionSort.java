@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 选择排序：
@@ -31,8 +31,8 @@ public class SelectionSort {
                     min = j;
                 }
             }
-            Tool.exch(data, i, min);
+            Util.exch(data, i, min);
         }
-        Tool.show(data);
+        Util.show(data);
     }
 }

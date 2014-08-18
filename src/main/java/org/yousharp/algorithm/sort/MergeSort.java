@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 归并排序：
@@ -26,7 +26,7 @@ public class MergeSort {
     public static void sort(int[] data) {
         int[] aux = new int[data.length];
         sort(data, aux, 0, data.length - 1);
-        Tool.show(data);
+        Util.show(data);
     }
 
     /**

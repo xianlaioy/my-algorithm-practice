@@ -1,6 +1,6 @@
 package org.yousharp.algorithm.sort;
 
-import org.yousharp.algorithm.Tool;
+import org.yousharp.algorithm.Util;
 
 /**
  * 堆排序：
@@ -42,10 +42,10 @@ public class HeapSort {
          * 其它节点都维持了大顶规则，所以只需要对堆顶元素进行一次调整即可。
          */
         while (end > 0) {
-            Tool.exch(data, 0, end--);
+            Util.exch(data, 0, end--);
             sink(data, 0, end);
         }
-        Tool.show(data);
+        Util.show(data);
     }
 
     /**
@@ -71,7 +71,7 @@ public class HeapSort {
                 break;
             }
             // 当前节点与左右节点中的较大值互换，继续向下调整
-            Tool.exch(data, k, j);
+            Util.exch(data, k, j);
             k = j;
         }
     }
