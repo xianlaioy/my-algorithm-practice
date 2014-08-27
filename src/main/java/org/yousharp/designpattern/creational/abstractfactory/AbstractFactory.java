@@ -2,16 +2,16 @@ package org.yousharp.designpattern.creational.abstractfactory;
 
 /**
  * 抽象工厂模式：提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类；
- * 我们有多种product，每一种product都有多种实现，但是这些product中对应实现属于同一类型，
- * 即product1的实现1与product2的实现1、与product3的实现是一个类型，则称为一系列具体产品，
- * 此时我们可以创建一个具体factory，用于创建这一系列产品的对象，每一系列产品对应一个具体
- * factory；在每一种产品上抽象出一个product接口，在具体的factory上抽象出一个factory接口，
- * 则形成了抽象工厂模式。
- *  - product1接口，product1实现1，product1实现2；
- *  - product2接口，product2实现1，product2实现2；
- *  - 抽象factory：创建product1，创建product2
- *  - 具体factory1：使用第一种实现创建product1和product2；
- *  - 具体factory2：使用第二种实现创建product1和product2；
+ *  我们有多种product，每一种product都有多种实现，但是这些product中对应实现属于同一类型，
+ *  即product1的实现1与product2的实现1、与product3的实现1是一个类型，则称为一系列具体产品，
+ *  此时我们可以创建一个具体factory，用于创建这一系列产品的对象，每一系列产品对应一个具体
+ *  factory；在每一种产品上抽象出一个product接口，在具体的factory上抽象出一个factory接口，
+ *  则形成了抽象工厂模式。
+ *  - product1接口，两种实现，product1实现1，product1实现2；
+ *  - product2接口，两种实现，product2实现1，product2实现2；
+ *  - 抽象factory：定义创建每一种产品的抽象方法，创建product1，创建product2
+ *  - 具体factory1：使用第一种实现创建每一种产品，product1和product2；
+ *  - 具体factory2：使用第二种实现创建每一种产品，product1和product2；
  *  - client：要创建某一种实现的一系列product时，只需初始化时指定具体的factory即可；
  *
  *  抽象工厂与工厂方法的区别于联系：

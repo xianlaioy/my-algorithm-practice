@@ -11,7 +11,7 @@ package org.yousharp.designpattern.creational.singleton;
  * Time: 下午9:35
  */
 public class DoubleCheckSingleton {
-	// volatile keyword
+	// volatile：使变量在线程间保持可见性
 	private volatile static DoubleCheckSingleton instance = null;
 
 	// private constructor

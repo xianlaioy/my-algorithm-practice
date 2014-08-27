@@ -1,10 +1,10 @@
 package org.yousharp.designpattern.creational.simplefactory;
 
 /**
- * 简单工厂模式：
- *  - client需要一个具体的product对象，不是直接通过new来创建，而是向factory请求；
- *  - factory接到client的请求，根据请求参数创建具体的product对象，并以抽象product返回；
- *  - client拿到的是抽象product，且无需关心是哪一个具体的product；
+ * 简单工厂模式：使用工厂来决定创建哪一个具体的实现；
+ *  - 一个product有多个实现，有一个factory类负责创建具体实现的对象；
+ *  - client需要一个product时，不是直接通过new来创建，而是告诉factory需要的product的类型；
+ *  - factory就是创建所有具体product的工厂，根据类型返回一个具体的对象(多态)；
  *
  * 两个要点：
  *  - product有一个抽象product，和一些具体product，当需要新加一个product时，只需继承抽象product即可；

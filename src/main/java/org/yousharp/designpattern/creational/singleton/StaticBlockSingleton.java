@@ -17,12 +17,8 @@ public class StaticBlockSingleton {
 
 	// static block
 	static {
-		try {
-			instance = new StaticBlockSingleton();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+        instance = new StaticBlockSingleton();
+    }
 
 	public static StaticBlockSingleton getInstance() {
 		return instance;

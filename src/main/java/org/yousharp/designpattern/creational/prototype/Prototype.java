@@ -1,8 +1,8 @@
-package org.yousharp.designpattern.prototype;
+package org.yousharp.designpattern.creational.prototype;
 
 /**
  * 原型模式：用原型的实例指定要创建的对象的种类，然后通过拷贝这些原型来创建新的实例；即从一个
- *  已有的对象创建新的可定制的对象，而不需知道任何创建的细节；
+ *  已有的对象创建新的可定制的对象，而不需要知道任何创建的细节；
  *
  *  应用场景：如果需要频繁创建对象，使用new的开销是很大的，使用原型模式，通过clone创建新的对象，
  *  可以减小对象创建的开销。

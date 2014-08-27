@@ -15,7 +15,7 @@ package org.yousharp.designpattern.creational.singleton;
  * @time: 2014/8/13 21:32
  */
 public class SynchronizedSingleton {
-    private static SynchronizedSingleton instance = null;
+    private static volatile SynchronizedSingleton instance = null;
 
     private SynchronizedSingleton() {}
 

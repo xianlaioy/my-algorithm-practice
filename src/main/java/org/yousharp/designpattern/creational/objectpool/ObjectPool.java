@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 适合的场景：
  *  - 对象的创建非常昂贵；
  *  - 对象创建的频率很高；
- *  - 同一时刻使用的对象的数量比较低
+ *  - 同一时刻使用的对象的数量比较少；
  *
  * 关键点：
  *  - 客户端需要一个对象，从资源池中获取，而不是直接创建；
@@ -96,6 +96,10 @@ public abstract class ObjectPool<T> {
         }
     }
 
+    /**
+     * 1. 显然，这里用到了模板方法模式：抽象类中定义算法的基本骨架和算法逻辑，然后将具体的
+     *  实现延迟到子类中；
+     */
 
     public abstract void expire(T conn);
 
@@ -113,6 +117,9 @@ class JDBCConnectionPool extends ObjectPool<Connection> {
 
     public JDBCConnectionPool(String driver, String url, String user, String pwd) {
         super();
+        /**
+         * 使用反射创建一个新的对象;
+         */
         try {
             Class.forName(driver).newInstance();
         } catch (Exception e) {

@@ -14,14 +14,14 @@ package org.yousharp.designpattern.structural.adapter;
  * 注意：
  *  - 在软件开发的早期，公司内部应该尽量统一类和方法的命名，如果此时接口就不相同，不应该考虑
  *  使用适配器模式，而是考虑通过重构统一接口；
- *  - 实现预防接口不同的问题，不匹配问题就不会发生了，在有小的接口不统一时，及时重构，问题
- *  不至于扩大；只有碰到无法改变原有设计和代码的情况时，才考虑重构；事后控制不如事中控制，
+ *  - 事先预防接口不同的问题，不匹配问题就不会发生了，在有小的接口不统一时，及时重构，问题
+ *  不至于扩大；只有碰到无法改变原有设计和代码的情况时，才考虑适配器模式；事后控制不如事中控制，
  *  事中控制不如事前控制；
  *
  * 适配器模式组件划分：
- *  - 客户期望的目标接口Target；
- *  - 现有的接口Adaptee；
- *  - 适配器类Adapter，实现目标接口Target，内部引用现有接口Adaptee的功能；
+ *  - Target：客户期望的目标接口Target；
+ *  - Adaptee: 现有的接口；
+ *  - Adapter: 适配器类，实现目标接口Target，内部引用现有接口Adaptee的功能，即内部包装了Adaptee；
  *
  *
  * @author: lingguo
@@ -30,6 +30,9 @@ package org.yousharp.designpattern.structural.adapter;
 public class Adapter {
 }
 
+/**
+ * Adaptee, 原有的接口
+ */
 class Coach {
     public String attack() {
         String attack = "attack";
@@ -44,6 +47,9 @@ class Coach {
     }
 }
 
+/**
+ * Adapter：适配器类
+ */
 class Translator implements ChnPlayer {
     Coach coach;
 
@@ -67,6 +73,9 @@ class Translator implements ChnPlayer {
     }
 }
 
+/**
+ * Target：客户期待的接口；
+ */
 interface ChnPlayer {
     public void chnAttack();
     public void chnDefense();

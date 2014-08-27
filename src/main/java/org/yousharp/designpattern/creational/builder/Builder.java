@@ -10,7 +10,7 @@ package org.yousharp.designpattern.creational.builder;
  *
  *  - builder：创建一个产品的各个部件的抽象接口(创建每一个子过程的方法集合)；
  *  - builder具体实现：实现builder接口，构建一个具体产品的各个部件；
- *  - directory：使用builder一步步构建具体表示的产品；
+ *  - director：使用builder一步步构建具体表示的产品，类似于督工，确保构建产品时不会漏掉某一个步骤；
  *  - product：产品
  *
  * 备注：
@@ -19,7 +19,7 @@ package org.yousharp.designpattern.creational.builder;
  *  来创建实例；
  *  - builder模式的重点是逐步地构建一个复杂的过程，而抽象工厂的关注点
  *  是构建一系列的对象，这一系列的对象很容易从一种实现切换到另一种实现；
- *  builder模式时逐步构建对象，最后返回，而抽象工厂是直接返回创建的对象。
+ *  builder模式是逐步构建对象，最后返回，而抽象工厂是直接返回创建的对象。
  *  - 一般情况下，设计时先使用工厂方法模式，然后逐步改造、优化，最终使用
  *  抽象工厂、原型或者builder模式；
  *

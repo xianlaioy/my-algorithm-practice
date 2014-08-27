@@ -22,6 +22,7 @@ public class ClassRegisterFactory {
      * factory采用单例
      */
     private static ClassRegisterFactory instance = new ClassRegisterFactory();
+
     /**
      * HashMap用于注册具体product的信息
      */
