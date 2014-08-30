@@ -1,4 +1,4 @@
-package org.yousharp.designpattern.behavioral;
+package org.yousharp.designpattern.behavioral.templatemethod;
 
 /**
  * 模板方法：定义一个算法框架，将一些实现步骤延迟到子类中；模板方法使得子类可以不改变
