@@ -6,7 +6,8 @@ package org.yousharp.designpattern.creational.abstractfactory;
  *  即product1的实现1与product2的实现1、与product3的实现1是一个类型，则称为一系列具体产品，
  *  此时我们可以创建一个具体factory，用于创建这一系列产品的对象，每一系列产品对应一个具体
  *  factory；在每一种产品上抽象出一个product接口，在具体的factory上抽象出一个factory接口，
- *  则形成了抽象工厂模式。
+ *  则形成了抽象工厂模式。产品的一种具体实现，对应一个具体的factory，所以具体factory的数量
+ *  与产品的具体实现的数量是一样的。
  *  - product1接口，两种实现，product1实现1，product1实现2；
  *  - product2接口，两种实现，product2实现1，product2实现2；
  *  - 抽象factory：定义创建每一种产品的抽象方法，创建product1，创建product2

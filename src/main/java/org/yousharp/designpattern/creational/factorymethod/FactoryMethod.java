@@ -6,7 +6,7 @@ package org.yousharp.designpattern.creational.factorymethod;
  * 简单地说，就是定义一个创建product的factory，然后对每一个具体的product，创建一个
  * 具体的子类factory，用于创建该具体product的实例；四个部分：
  *  - 抽象factory：定义一个创建抽象product的方法；
- *  - 具体factory：实现父接口的创建，创建具体product的实例；
+ *  - 具体factory：实现父接口的创建方法，创建具体product的实例；
  *  - 抽象product：product的抽象接口；
  *  - 具体product：描述具体的product；
  *

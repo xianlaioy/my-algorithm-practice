@@ -6,14 +6,17 @@ package org.yousharp.julycoding.string;
  *
  * 思路：
  *  【思路一】；遍历每一个字符，以该字符为中心，向两端扩展形成回文串，遍历完毕，取最大值即可；
- *  这里就是需要分两种情况：回文串为偶数和奇数。
- *  参考：https://github.com/nkcoder/The-Art-Of-Programming-By-July/blob/master/ebook/zh/01.05.md
+ *  这里就是需要分两种情况进行讨论：回文串为偶数和奇数。
+ *  时间复杂度为O(n^2)；
+ *  参考：
+ *      https://github.com/nkcoder/The-Art-Of-Programming-By-July/blob/master/ebook/zh/01.05.md
  *
  *  【思路二】：Manacher算法
  *  - 在每个字符的前面增加一个固定字符，如'#'，则可以屏蔽奇偶的讨论，如字符串为"abcdcba", 增加字符后变为：
  *  "^#a#b#c#d#c#b#a#$"，其中首尾的$和^用于边界判断；
  *  - 利用对称性，假定已知最长回文串的索引c和p[c]，则其左右边界分为为L=c-p[c], R=c+p[c]，以右边界为基准；
- *  如果遍历到的当前字符为i，其回文长度可以先尝试从关于其对称点2c-i获取，分情况讨论如下：
+ *  如果遍历到的当前字符为i，其回文长度可以先尝试从关于其对称点2c-i获取(因为其对称点已经被遍历过了，对称长
+ *  度是已知的)，分情况讨论如下：
  *      - 如果i < R，即i在c的右边界之内，此时其对称点2c-i在左边界之内，则此时i在R之内的部分的回文长度为：R-i和
  *      p[2c-i]的较小值，R之外的部分在此基础上累加；(这部分需要画图帮助理解)
  *      - 如果 i >= R，即i在c的边界之外，则对称性无法使用，只能挨个遍历；
@@ -99,14 +102,14 @@ public class LongestPalindrome {
         int len = dest.length;
         int maxIndex = 0;
         int rightBorder = 0;
-        // 保存每个字符的回文长度(其实是整个回文串一般的长度，不包含当前字符)
+        // 保存每个字符的回文长度(其实是整个回文串一半的长度，不包含当前字符)
         int[] pal = new int[len];
 
         for (int i = 1; i < len - 1; i++) {
             // 对称点
             int iMirror = 2 * maxIndex - i;
             // 当前访问的字符在右边界R之内，利用对称点的回文信息
-            if (rightBorder > i) {
+            if (rightBorder > i && iMirror >= 0) {
                 pal[i] = Math.min(rightBorder - i, pal[iMirror]);
             } else {
                 pal[i] = 0;     // 右边界之外，挨个遍历

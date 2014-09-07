@@ -58,7 +58,10 @@ public class Palindrome {
         if (str.length == 1) {
             return true;
         }
-        /* 确定指针的首尾位置 */
+        /**
+         * 确定指针的首尾位置，这里没有判断str长度的奇偶，因为如果是奇数，
+         * 最中间的对称字符不用比较，直接忽略了。
+          */
         int midLeft = (str.length >> 1) - 1;
         int midRight = str.length - 1 - midLeft;
         while (midLeft >= 0) {

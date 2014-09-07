@@ -25,6 +25,7 @@ package org.yousharp.designpattern.creational.builder;
  *
  * 参考：
  *  - http://sourcemaking.com/design_patterns/builder
+ *  - http://stackoverflow.com/questions/328496/when-would-you-use-the-builder-pattern
  *
  * @author: lingguo
  * @time: 2014/8/16 9:21

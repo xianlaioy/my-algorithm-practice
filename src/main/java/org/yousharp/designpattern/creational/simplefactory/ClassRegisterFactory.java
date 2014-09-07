@@ -81,7 +81,7 @@ interface Sport {
 }
 
 /**
- * 具体product 1，加载后立即注册
+ * 具体product 1，加载时立即注册
  */
 class BasketBall implements Sport {
     static {
@@ -95,7 +95,7 @@ class BasketBall implements Sport {
 }
 
 /**
- * 具体product 2，加载后立即注册
+ * 具体product 2，加载时立即注册
  */
 class Football implements Sport {
     static {
@@ -110,7 +110,7 @@ class Football implements Sport {
 
 /**
  * 具体的product只有加载后才能注册到HashMap中，才能通过factory创建实例，如果没有注册，则返回的实例为null；
- * 因此，可以在类的static块中，调用Class.forName()方法(因此static块是在类加载后立即调用的)，该方法返回该类
+ * 因此，可以在类的static块中，调用Class.forName()方法(因为static块是在类加载后立即调用的)，该方法返回该类
  * 的变量，如果该类还没有加载，则该方法被调用时先加载(参数名必须为全限定类名)。
  */
 class SportClient {

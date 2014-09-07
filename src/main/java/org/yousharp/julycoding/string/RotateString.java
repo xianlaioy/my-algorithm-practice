@@ -20,7 +20,9 @@ public class RotateString {
      *  复杂度为 O(1)。
      *
      * 思路：
-     *  三步旋转法：(X^TY^T)^T=YX
+     *  三步旋转法：先局部翻转再整体翻转，或者先整体翻转，再局部翻转；
+     *     比如：abcdef -> bafedc -> cdefab, 或者：abcdef -> bedcba -> cdefab
+     *      (X^TY^T)^T=YX
      *
      * @param str   输入串
      * @param n     前n个字符移到串的最后
