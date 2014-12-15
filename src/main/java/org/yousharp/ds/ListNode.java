@@ -1,4 +1,4 @@
-package org.yousharp.common;
+package org.yousharp.ds;
 
 /**
  * 链表节点的定义

@@ -1,7 +1,7 @@
 package org.yousharp.julycoding.string;
 
-import org.yousharp.common.ListNode;
-import org.yousharp.common.Stack;
+import org.yousharp.ds.ListNode;
+import org.yousharp.ds.Stack;
 
 /**
  * 问题描述：

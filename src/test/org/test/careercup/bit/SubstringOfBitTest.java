@@ -13,7 +13,7 @@ public class SubstringOfBitTest extends BaseTest {
     @Test
     public void testUpdateBits1() {
         int m = Integer.parseInt("10101", 2);
-        int n = Integer.parseInt("10000000000", 2);
+        int n = Integer.parseInt("10000000100", 2);
         int i = 2;
         int j = 6;
 

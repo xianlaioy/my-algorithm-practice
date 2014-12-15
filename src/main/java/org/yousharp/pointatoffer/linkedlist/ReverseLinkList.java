@@ -1,6 +1,6 @@
 package org.yousharp.pointatoffer.linkedlist;
 
-import org.yousharp.common.ListNode;
+import org.yousharp.ds.ListNode;
 
 /**
  * 问题描述：

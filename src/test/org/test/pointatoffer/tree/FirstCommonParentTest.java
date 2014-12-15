@@ -3,7 +3,7 @@ package org.test.pointatoffer.tree;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.test.BaseTest;
-import org.yousharp.common.TreeNode;
+import org.yousharp.ds.TreeNode;
 import org.yousharp.pointatoffer.tree.FirstCommonParent;
 
 import java.util.LinkedList;

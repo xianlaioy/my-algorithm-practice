@@ -29,7 +29,7 @@ public class SubstringOfBit {
      */
     public static int updateBits1(int m, int n, int i, int j) {
         int first = (1 << (j + 1)) - 1;     // 0到j位置1
-        int second = (1 << (i + 1)) - 1;    // 0到i位置1
+        int second = (1 << (i)) - 1;    // 0到i位置1
 
         int mask = ~(first - second);       // i到j位置1，取反
         return (n & mask) | (m << i);       // 求结果
@@ -49,7 +49,7 @@ public class SubstringOfBit {
     public static int updateBits2(int m, int n, int i, int j) {
         int max = ~0;   // 所有位均为1，max值为-1，因为所有位均为1，是个复数，减1取反，得到其正数表示
         int left = max - ((1 << (j + 1)) - 1);      // 将j+1位到最高位(32)置1
-        int right = (1 << (i + 1)) - 1;             // 将0到i位置1
+        int right = (1 << (i)) - 1;             // 将0到i位置1
 
         int mask = left | right;            // 或操作得到mask
         return (n & mask) | (m << i);

@@ -2,7 +2,7 @@ package org.test.pointatoffer.tree;
 
 import org.junit.Test;
 import org.test.BaseTest;
-import org.yousharp.common.TreeNode;
+import org.yousharp.ds.TreeNode;
 import org.yousharp.pointatoffer.tree.IsSubTree;
 
 /**

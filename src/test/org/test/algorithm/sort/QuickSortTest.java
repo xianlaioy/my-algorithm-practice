@@ -17,4 +17,11 @@ public class QuickSortTest extends BaseTest {
         QuickSort.sort(data, 0, data.length - 1);
         Util.show(data);
     }
+
+    @Test
+    public void testSort2() {
+        int[] data = {34, 21};
+        QuickSort.sort(data, 0, data.length - 1);
+        Util.show(data);
+    }
 }

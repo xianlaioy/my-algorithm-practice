@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.test.BaseTest;
-import org.yousharp.common.ListNode;
+import org.yousharp.ds.ListNode;
 import org.yousharp.julycoding.string.RotateString;
 
 /**

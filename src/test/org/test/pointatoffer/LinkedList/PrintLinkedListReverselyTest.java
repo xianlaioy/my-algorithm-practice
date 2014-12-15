@@ -2,7 +2,7 @@ package org.test.pointatoffer.linkedlist;
 
 import org.junit.Test;
 import org.test.BaseTest;
-import org.yousharp.common.ListNode;
+import org.yousharp.ds.ListNode;
 import org.yousharp.pointatoffer.linkedlist.PrintLinkedListReversely;
 
 /**

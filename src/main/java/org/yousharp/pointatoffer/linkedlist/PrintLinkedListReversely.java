@@ -2,7 +2,7 @@ package org.yousharp.pointatoffer.linkedlist;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yousharp.common.ListNode;
+import org.yousharp.ds.ListNode;
 
 import java.util.LinkedList;
 

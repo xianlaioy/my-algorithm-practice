@@ -1,4 +1,4 @@
-package org.yousharp.common;
+package org.yousharp.ds;
 
 /**
  * 基本数据结构：队列的实现

@@ -2,7 +2,7 @@ package org.yousharp.julycoding.string;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yousharp.common.ListNode;
+import org.yousharp.ds.ListNode;
 
 /**
  * 1.1 旋转字符串

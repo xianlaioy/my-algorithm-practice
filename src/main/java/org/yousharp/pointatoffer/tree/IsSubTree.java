@@ -2,7 +2,7 @@ package org.yousharp.pointatoffer.tree;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yousharp.common.TreeNode;
+import org.yousharp.ds.TreeNode;
 
 /**
  * 问题描述：
